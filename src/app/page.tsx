@@ -1,37 +1,15 @@
-"use client";
+import { UserResponse, fetchUser } from "@/action/user";
 
-import { useCallback } from "react";
+export default async function Home() {
+  const res = await fetchUser();
+  const user = (await res.json()) as UserResponse;
 
-import { UserResponse } from "@/api/users/route";
-
-const loginUrl = `${process.env.NEXT_PUBLIC_ENDPOINT}/api/login`;
-const userUrl = `${process.env.NEXT_PUBLIC_ENDPOINT}/api/users`;
-
-export default function Home() {
-  const handleLogin = useCallback(async () => {
-    try {
-      const res = await fetch(loginUrl, {
-        method: "POST",
-      });
-      console.log(res);
-    } catch (error) {
-      console.error(error);
-    }
-  }, []);
-
-  const handleFetchUser = useCallback(async () => {
-    try {
-      const res = await fetch(userUrl);
-      const data = (await res.json()) as UserResponse;
-      console.log(data);
-    } catch (error) {
-      console.error(error);
-    }
-  }, []);
   return (
     <>
-      <button onClick={handleLogin}>ログイン</button>
-      <button onClick={handleFetchUser}>ユーザー取得</button>
+      <h3>ユーザー名</h3>
+      <p>{user.username}</p>
+      <h3>メールアドレス</h3>
+      <p>{user.email}</p>
     </>
   );
 }
