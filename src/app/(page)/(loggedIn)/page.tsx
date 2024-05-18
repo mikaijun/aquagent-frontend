@@ -1,5 +1,4 @@
 import { UserResponse, fetchUser } from "@/action/user";
-
 import { LogoutButton } from "@/page/home/components/LogoutButton";
 
 export default async function Home() {

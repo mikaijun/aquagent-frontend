@@ -10,7 +10,7 @@ export const JWT = "jwt";
 export const USER_ID = "userId";
 
 export const parseCookiesFromHeaders = (
-  headers: Headers
+  headers: Headers,
 ): CookiesFromHeadersType => {
   const getSetCookie = headers.getSetCookie();
   const cookieList = getSetCookie.map((x) => x.split(";")[0]);
@@ -21,7 +21,7 @@ export const parseCookiesFromHeaders = (
 };
 
 export const formatCookiesForHeader = (
-  cookiesStore: ReadonlyRequestCookies
+  cookiesStore: ReadonlyRequestCookies,
 ) => {
   const jwt = cookiesStore.get(JWT)?.value;
   const userId = cookiesStore.get(USER_ID)?.value;
@@ -31,7 +31,7 @@ export const formatCookiesForHeader = (
 };
 
 export const parseCookiesFromCookies = (
-  cookies: RequestCookie[]
+  cookies: RequestCookie[],
 ): CookiesFromHeadersType => {
   const jwt = cookies.find((x) => x.name === JWT)?.value ?? "";
   const userId = cookies.find((x) => x.name === USER_ID)?.value ?? "";
