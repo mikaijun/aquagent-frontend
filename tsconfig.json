@@ -18,10 +18,11 @@
       }
     ],
     "paths": {
+      "@/action/*": ["./src/app/(action)/*"],
       "@/page*": ["./src/app/page/*"],
       "@/api/*": ["./src/app/api/*"],
-      "@/action/*": ["./src/app/(action)/*"],
-      "@/schema/*": ["./src/schema/*"]
+      "@/constants/*": ["./src/constants/*"],
+      "@/utils/*": ["./src/utils/*"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],

@@ -1,7 +1,7 @@
 import { cookies } from "next/headers";
 import { NextResponse } from "next/server";
 
-import { generateHeaderCookies } from "@/api/_util/cookie";
+import { formatCookiesForHeader } from "@/utils/cookies";
 
 const url = `${process.env.NEXT_PUBLIC_API_ENDPOINT}/v1/users`;
 
@@ -17,7 +17,7 @@ export async function GET(): Promise<NextResponse<UserResponse>> {
     const response = await fetch(url, {
       headers: {
         "Content-Type": "application/json",
-        Cookie: generateHeaderCookies(cookiesStore),
+        Cookie: formatCookiesForHeader(cookiesStore),
       },
       credentials: "include",
     });

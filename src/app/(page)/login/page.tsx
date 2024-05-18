@@ -5,29 +5,31 @@ import { parseWithZod } from "@conform-to/zod";
 import { useFormState } from "react-dom";
 
 import { login } from "@/action/login";
-import { loginSchema } from "@/schema/auth";
+import { loginSchema } from "@/constants/zods";
+
+const initialState: SubmissionResult<string[]> = {
+  status: "success",
+  fields: ["email", "password"],
+  initialValue: {
+    email: "",
+    password: "",
+  },
+};
 
 const LoginForm = () => {
-  const initialState: SubmissionResult<string[]> = {
-    status: "success",
-    fields: ["email", "password"],
-    initialValue: {
-      email: "",
-      password: "",
-    },
-  };
   const [lastResult, action] = useFormState(login, initialState);
+  const { error } = lastResult;
   const [form, fields] = useForm({
     lastResult,
     onValidate({ formData }) {
       return parseWithZod(formData, { schema: loginSchema });
     },
-    shouldValidate: "onBlur",
+    shouldValidate: "onSubmit",
   });
-  console.log(lastResult);
 
   return (
     <form noValidate action={action} id={form.id} onSubmit={form.onSubmit}>
+      {error && <div>{Object.values(error)[0]}</div>}
       <div>
         <label htmlFor={fields.email.id}>Email</label>
         <input name={fields.email.name} type="email" />
