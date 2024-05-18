@@ -3,7 +3,7 @@ import { NextResponse } from "next/server";
 
 import { formatCookiesForHeader } from "@/utils/cookies";
 
-const url = `${process.env.NEXT_PUBLIC_API_ENDPOINT}/v1/users`;
+import { endPoint } from "@/constants/urls";
 
 export type UserResponse = {
   id: number;
@@ -14,7 +14,7 @@ export type UserResponse = {
 export async function fetchUser(): Promise<NextResponse<UserResponse>> {
   const cookiesStore = cookies();
   try {
-    const response = await fetch(url, {
+    const response = await fetch(endPoint.user.fetch, {
       headers: {
         "Content-Type": "application/json",
         Cookie: formatCookiesForHeader(cookiesStore),

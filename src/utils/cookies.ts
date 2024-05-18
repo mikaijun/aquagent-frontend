@@ -6,31 +6,34 @@ type CookiesFromHeadersType = {
   userId: string;
 };
 
+export const JWT = "jwt";
+export const USER_ID = "userId";
+
 export const parseCookiesFromHeaders = (
-  headers: Headers,
+  headers: Headers
 ): CookiesFromHeadersType => {
   const getSetCookie = headers.getSetCookie();
   const cookieList = getSetCookie.map((x) => x.split(";")[0]);
-  const jwt = cookieList.find((x) => x.includes("jwt"))?.split("=")[1] ?? "";
+  const jwt = cookieList.find((x) => x.includes(JWT))?.split("=")[1] ?? "";
   const userId =
-    cookieList.find((x) => x.includes("userId"))?.split("=")[1] ?? "";
+    cookieList.find((x) => x.includes(USER_ID))?.split("=")[1] ?? "";
   return { jwt, userId };
 };
 
 export const formatCookiesForHeader = (
-  cookiesStore: ReadonlyRequestCookies,
+  cookiesStore: ReadonlyRequestCookies
 ) => {
-  const jwt = cookiesStore.get("jwt")?.value;
-  const userId = cookiesStore.get("userId")?.value;
+  const jwt = cookiesStore.get(JWT)?.value;
+  const userId = cookiesStore.get(USER_ID)?.value;
   if (!jwt || !userId) return "";
 
-  return `jwt=${jwt}; userId=${userId}`;
+  return `${JWT}=${jwt}; ${USER_ID}=${userId}`;
 };
 
 export const parseCookiesFromCookies = (
-  cookies: RequestCookie[],
+  cookies: RequestCookie[]
 ): CookiesFromHeadersType => {
-  const jwt = cookies.find((x) => x.name === "jwt")?.value ?? "";
-  const userId = cookies.find((x) => x.name === "userId")?.value ?? "";
+  const jwt = cookies.find((x) => x.name === JWT)?.value ?? "";
+  const userId = cookies.find((x) => x.name === USER_ID)?.value ?? "";
   return { jwt, userId };
 };

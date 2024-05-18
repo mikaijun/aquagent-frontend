@@ -4,7 +4,7 @@ import { SubmissionResult, useForm } from "@conform-to/react";
 import { parseWithZod } from "@conform-to/zod";
 import { useFormState } from "react-dom";
 
-import { login } from "@/action/login";
+import { login } from "@/action/auth";
 import { loginSchema } from "@/constants/zods";
 
 const initialState: SubmissionResult<string[]> = {

@@ -19,8 +19,7 @@
     ],
     "paths": {
       "@/action/*": ["./src/app/(action)/*"],
-      "@/page*": ["./src/app/page/*"],
-      "@/api/*": ["./src/app/api/*"],
+      "@/page*": ["./src/features/page/*"],
       "@/constants/*": ["./src/constants/*"],
       "@/utils/*": ["./src/utils/*"]
     }
