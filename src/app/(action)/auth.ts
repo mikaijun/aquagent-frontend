@@ -45,7 +45,7 @@ export async function login(_: unknown, formData: FormData) {
 
 export async function logout() {
   const cookiesStore = cookies();
-  const response = await fetch(endPoint.auth.logout, {
+  await fetch(endPoint.loggedIn.logout, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
@@ -53,11 +53,8 @@ export async function logout() {
     },
     credentials: "include",
   });
-  if (response.status === 200) {
-    cookies().delete(JWT);
-    cookies().delete(USER_ID);
-    redirect(PagePath.login);
-  } else {
-    console.error("logout failed");
-  }
+
+  cookies().delete(JWT);
+  cookies().delete(USER_ID);
+  redirect(PagePath.login);
 }

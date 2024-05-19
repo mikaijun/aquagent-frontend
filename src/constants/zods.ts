@@ -9,3 +9,7 @@ export const loginSchema = z.object({
     .email(),
   password: z.string(),
 });
+
+export const waterSchema = z.object({
+  water: z.any(),
+});

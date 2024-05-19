@@ -8,9 +8,10 @@ export const PagePath = {
 export const endPoint = {
   auth: {
     login: `${baseurl}/login`,
-    logout: `${baseurl}/logout`,
   },
-  user: {
-    fetch: `${baseurl}/v1/users`,
+  loggedIn: {
+    users: `${baseurl}/v1/users`,
+    waters: `${baseurl}/v1/waters`,
+    logout: `${baseurl}/logout`,
   },
 };

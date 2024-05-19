@@ -14,7 +14,7 @@ export type UserResponse = {
 export async function fetchUser(): Promise<NextResponse<UserResponse>> {
   const cookiesStore = cookies();
   try {
-    const response = await fetch(endPoint.user.fetch, {
+    const response = await fetch(endPoint.loggedIn.users, {
       headers: {
         "Content-Type": "application/json",
         Cookie: formatCookiesForHeader(cookiesStore),
