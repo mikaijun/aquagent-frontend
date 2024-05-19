@@ -4,6 +4,8 @@ import { SubmissionResult, useForm } from "@conform-to/react";
 import { parseWithZod } from "@conform-to/zod";
 import { useFormState } from "react-dom";
 
+import { Button } from "@/components/ui/button";
+
 import { login } from "@/action/auth";
 import { loginSchema } from "@/constants/zods";
 
@@ -44,7 +46,7 @@ const LoginForm = () => {
         <input name={fields.password.name} type="password" />
         <div>{fields.password.errors}</div>
       </div>
-      <button>Login</button>
+      <Button>Login</Button>
     </form>
   );
 };
