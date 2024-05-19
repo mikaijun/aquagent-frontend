@@ -30,7 +30,12 @@ const LoginForm = () => {
     <form noValidate action={action} id={form.id} onSubmit={form.onSubmit}>
       {error && <div>{Object.values(error)[0]}</div>}
       <div>
-        <label htmlFor={fields.email.id}>Email</label>
+        <label
+          className="text-3xl font-bold underline"
+          htmlFor={fields.email.id}
+        >
+          Email
+        </label>
         <input name={fields.email.name} type="email" />
         <div>{fields.email.errors}</div>
       </div>

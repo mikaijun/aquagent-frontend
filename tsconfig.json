@@ -18,6 +18,7 @@
       }
     ],
     "paths": {
+      "@/app/*": ["./src/app/*"],
       "@/action/*": ["./src/app/(action)/*"],
       "@/page*": ["./src/features/page/*"],
       "@/constants/*": ["./src/constants/*"],
