@@ -12,14 +12,15 @@ export function middleware(request: NextRequest) {
   const isLogin = !!jwt && !!userId;
   const { pathname } = request.nextUrl;
   const url = request.nextUrl.clone();
+  const loggedInPaths = Object.values(PagePath.loggedIn);
 
-  if (PagePath.home === pathname && !isLogin) {
-    url.pathname = PagePath.login;
+  if (loggedInPaths.includes(pathname) && !isLogin) {
+    url.pathname = PagePath.auth.login;
     return NextResponse.redirect(url);
   }
 
-  if (PagePath.login === pathname && isLogin) {
-    url.pathname = PagePath.home;
+  if (PagePath.auth.login === pathname && isLogin) {
+    url.pathname = PagePath.loggedIn.home;
     return NextResponse.redirect(url);
   }
 

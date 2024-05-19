@@ -27,7 +27,7 @@ const WaterInformation: React.FC<WaterInformationProps> = ({ water }) => {
       alert("削除しました");
       router.refresh();
     }
-  }, [water]);
+  }, [water, router]);
   return (
     <>
       {isEdit ? (

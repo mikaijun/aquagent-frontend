@@ -61,5 +61,5 @@ export async function logout() {
 
   cookies().delete(JWT);
   cookies().delete(USER_ID);
-  redirect(PagePath.login);
+  redirect(PagePath.auth.login);
 }

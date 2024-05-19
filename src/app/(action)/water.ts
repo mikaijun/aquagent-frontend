@@ -20,7 +20,7 @@ export type WaterResponse = {
 
 export async function createWater(
   lastResult: SubmissionResult<string[]>,
-  formData: FormData
+  formData: FormData,
 ): Promise<SubmissionResult<string[]>> {
   const submission = parseWithZod(formData, {
     schema: waterSchema,

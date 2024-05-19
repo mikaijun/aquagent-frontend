@@ -1,9 +1,14 @@
 const baseurl = process.env.NEXT_PUBLIC_API_ENDPOINT;
 
 export const PagePath = {
-  home: "/",
-  login: "/login",
-} as const;
+  auth: {
+    login: "/login",
+  },
+  loggedIn: {
+    home: "/",
+    water: "/water",
+  },
+};
 
 export const endPoint = {
   auth: {
