@@ -1,5 +1,6 @@
 "use server";
 
+import { SubmissionResult } from "@conform-to/react";
 import { parseWithZod } from "@conform-to/zod";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
@@ -14,7 +15,10 @@ import {
 import { PagePath, endPoint } from "@/constants/urls";
 import { loginSchema } from "@/constants/zods";
 
-export async function login(_: unknown, formData: FormData) {
+export async function login(
+  _: unknown,
+  formData: FormData,
+): Promise<SubmissionResult<string[]>> {
   const submission = parseWithZod(formData, {
     schema: loginSchema,
   });
@@ -37,9 +41,10 @@ export async function login(_: unknown, formData: FormData) {
     cookies().set(USER_ID, userId);
     redirect("/");
   } else {
-    return submission.reply({
-      formErrors: ["メールアドレスかパスワードが誤ってます"],
-    });
+    return {
+      status: "error",
+      error: { message: ["メールアドレスかパスワードが誤ってます"] },
+    };
   }
 }
 
