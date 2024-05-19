@@ -19,7 +19,7 @@ export type WaterResponse = {
 };
 
 export async function createWater(
-  _: unknown,
+  lastResult: SubmissionResult<string[]>,
   formData: FormData,
 ): Promise<SubmissionResult<string[]>> {
   const submission = parseWithZod(formData, {
@@ -29,17 +29,23 @@ export async function createWater(
   if (submission.status !== "success") {
     return submission.reply();
   }
+  const id = lastResult?.initialValue
+    ? (lastResult?.initialValue.id as number)
+    : null;
+
+  const url = id ? endPoint.loggedIn.water(id) : endPoint.loggedIn.waters;
+  const method = id ? "PUT" : "POST";
 
   const cookiesStore = cookies();
-  const response = await fetch(endPoint.loggedIn.waters, {
-    method: "POST",
+  const response = await fetch(url, {
+    method,
     headers: {
       "Content-Type": "application/json",
       Cookie: formatCookiesForHeader(cookiesStore),
     },
     credentials: "include",
     body: JSON.stringify({
-      volume: Number(submission.value.water),
+      volume: Number(submission.value.volume),
     }),
   });
   if (response.status === 200) {

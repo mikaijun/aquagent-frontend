@@ -11,5 +11,6 @@ export const loginSchema = z.object({
 });
 
 export const waterSchema = z.object({
-  water: z.any(),
+  id: z.number().nullish(),
+  volume: z.string(),
 });

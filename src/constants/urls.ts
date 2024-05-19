@@ -12,6 +12,7 @@ export const endPoint = {
   loggedIn: {
     users: `${baseurl}/v1/users`,
     waters: `${baseurl}/v1/waters`,
+    water: (id: number) => `${baseurl}/v1/waters/${id}`,
     logout: `${baseurl}/logout`,
   },
 };

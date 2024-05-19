@@ -1,4 +1,5 @@
 import { WaterResponse, fetchWaters } from "@/action/water";
+import WaterInformation from "@/page/water/WaterInformation";
 
 export default async function Water() {
   const res = await fetchWaters();
@@ -10,9 +11,7 @@ export default async function Water() {
       <ul>
         {waters.map((water) => (
           <div key={water.ID} style={{ marginBottom: "20px" }}>
-            <li>{water.Volume}</li>
-            <li>{water.CreatedAt}</li>
-            <button>編集</button>
+            <WaterInformation water={water} />
           </div>
         ))}
       </ul>

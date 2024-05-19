@@ -1,6 +1,6 @@
 import { UserResponse, fetchUser } from "@/action/user";
 import { LogoutButton } from "@/page/home/components/LogoutButton";
-import WaterForm from "@/page/home/components/WaterForm";
+import WaterForm from "@/pagewater/WaterForm";
 
 export default async function Home() {
   const res = await fetchUser();
