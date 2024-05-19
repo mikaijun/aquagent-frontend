@@ -20,7 +20,7 @@ export type WaterResponse = {
 
 export async function createWater(
   lastResult: SubmissionResult<string[]>,
-  formData: FormData,
+  formData: FormData
 ): Promise<SubmissionResult<string[]>> {
   const submission = parseWithZod(formData, {
     schema: waterSchema,
@@ -53,6 +53,20 @@ export async function createWater(
   } else {
     return { status: "error", error: { message: ["登録に失敗しました"] } };
   }
+}
+
+export async function deleteWater({ id }: { id: number }) {
+  const cookiesStore = cookies();
+
+  const response = await fetch(endPoint.loggedIn.water(id), {
+    method: "DELETE",
+    headers: {
+      "Content-Type": "application/json",
+      Cookie: formatCookiesForHeader(cookiesStore),
+    },
+    credentials: "include",
+  });
+  return response.status === 200;
 }
 
 export async function fetchWaters(): Promise<NextResponse<WaterResponse[]>> {
