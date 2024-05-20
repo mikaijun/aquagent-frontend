@@ -1,65 +1,66 @@
-"use server";
+'use server'
 
-import { SubmissionResult } from "@conform-to/react";
-import { parseWithZod } from "@conform-to/zod";
-import { cookies } from "next/headers";
-import { redirect } from "next/navigation";
+import { SubmissionResult } from '@conform-to/react'
+import { parseWithZod } from '@conform-to/zod'
+import { cookies } from 'next/headers'
+import { redirect } from 'next/navigation'
 
 import {
   JWT,
   USER_ID,
   formatCookiesForHeader,
   parseCookiesFromHeaders,
-} from "@/utils/cookies";
+} from '@/utils/cookies'
 
-import { PagePath, endPoint } from "@/constants/urls";
-import { loginSchema } from "@/constants/zods";
+import { PagePath, endPoint } from '@/constants/urls'
+import { loginSchema } from '@/constants/zods'
 
 export async function login(
   _: unknown,
   formData: FormData,
 ): Promise<SubmissionResult<string[]>> {
+  console.log(formData)
   const submission = parseWithZod(formData, {
     schema: loginSchema,
-  });
+  })
 
-  if (submission.status !== "success") {
-    return submission.reply();
+  if (submission.status !== 'success') {
+    return submission.reply()
   }
 
   const response = await fetch(endPoint.auth.login, {
-    method: "POST",
+    method: 'POST',
     headers: {
-      "Content-Type": "application/json",
+      'Content-Type': 'application/json',
     },
-    credentials: "include",
+    credentials: 'include',
     body: JSON.stringify(submission.value),
-  });
+  })
   if (response.status === 200) {
-    const { jwt, userId } = parseCookiesFromHeaders(response.headers);
-    cookies().set(JWT, jwt);
-    cookies().set(USER_ID, userId);
-    redirect("/");
+    const { jwt, userId } = parseCookiesFromHeaders(response.headers)
+    cookies().set(JWT, jwt)
+    cookies().set(USER_ID, userId)
+    redirect('/')
   } else {
     return {
-      status: "error",
-      error: { message: ["メールアドレスかパスワードが誤ってます"] },
-    };
+      status: 'error',
+      error: { message: ['メールアドレスかパスワードが誤ってます'] },
+    }
   }
 }
 
 export async function logout() {
-  const cookiesStore = cookies();
+  const cookiesStore = cookies()
   await fetch(endPoint.loggedIn.logout, {
-    method: "GET",
+    method: 'GET',
     headers: {
-      "Content-Type": "application/json",
+      'Content-Type': 'application/json',
       Cookie: formatCookiesForHeader(cookiesStore),
     },
-    credentials: "include",
-  });
+    credentials: 'include',
+  })
 
-  cookies().delete(JWT);
-  cookies().delete(USER_ID);
-  redirect(PagePath.auth.login);
+  cookies().delete(JWT)
+  cookies().delete(USER_ID)
+  redirect(PagePath.auth.login)
 }

@@ -1,14 +1,14 @@
-const baseurl = process.env.NEXT_PUBLIC_API_ENDPOINT;
+const baseurl = process.env.NEXT_PUBLIC_API_ENDPOINT
 
 export const PagePath = {
   auth: {
-    login: "/login",
+    login: '/login',
   },
   loggedIn: {
-    home: "/",
-    water: "/water",
+    home: '/',
+    water: '/water',
   },
-};
+}
 
 export const endPoint = {
   auth: {
@@ -20,4 +20,4 @@ export const endPoint = {
     water: (id: number) => `${baseurl}/v1/waters/${id}`,
     logout: `${baseurl}/logout`,
   },
-};
+}

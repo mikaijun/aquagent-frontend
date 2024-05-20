@@ -1,33 +1,33 @@
-"use client";
+'use client'
 
-import { useRouter } from "next/navigation";
-import { useCallback, useState } from "react";
+import { useRouter } from 'next/navigation'
+import { useCallback, useState } from 'react'
 
-import { WaterResponse, deleteWater } from "@/action/water";
-import WaterForm from "@/page/water/WaterForm";
+import { WaterResponse, deleteWater } from '@/action/water'
+import WaterForm from '@/page/water/WaterForm'
 
 type WaterInformationProps = {
-  water: WaterResponse;
-};
+  water: WaterResponse
+}
 
 const WaterInformation: React.FC<WaterInformationProps> = ({ water }) => {
-  const [isEdit, setIsEdit] = useState<boolean>(false);
-  const router = useRouter();
+  const [isEdit, setIsEdit] = useState<boolean>(false)
+  const router = useRouter()
   const handleChangeEditMode = useCallback(() => {
-    setIsEdit(true);
-  }, []);
+    setIsEdit(true)
+  }, [])
 
   const handleChangeInfoMode = useCallback(() => {
-    setIsEdit(false);
-  }, []);
+    setIsEdit(false)
+  }, [])
 
   const handleDelete = useCallback(async () => {
-    const isSuccess = await deleteWater({ id: water.ID });
+    const isSuccess = await deleteWater({ id: water.ID })
     if (isSuccess) {
-      alert("削除しました");
-      router.refresh();
+      alert('削除しました')
+      router.refresh()
     }
-  }, [water, router]);
+  }, [water, router])
   return (
     <>
       {isEdit ? (
@@ -44,7 +44,7 @@ const WaterInformation: React.FC<WaterInformationProps> = ({ water }) => {
         </>
       )}
     </>
-  );
-};
+  )
+}
 
-export default WaterInformation;
+export default WaterInformation

@@ -1,28 +1,28 @@
-import { NextResponse } from "next/server";
+import { NextResponse } from 'next/server'
 
-import { parseCookiesFromCookies } from "@/utils/cookies";
+import { parseCookiesFromCookies } from '@/utils/cookies'
 
-import { PagePath } from "@/constants/urls";
+import { PagePath } from '@/constants/urls'
 
-import type { NextRequest } from "next/server";
+import type { NextRequest } from 'next/server'
 
 export function middleware(request: NextRequest) {
-  const cookies = request.cookies.getAll();
-  const { jwt, userId } = parseCookiesFromCookies(cookies);
-  const isLogin = !!jwt && !!userId;
-  const { pathname } = request.nextUrl;
-  const url = request.nextUrl.clone();
-  const loggedInPaths = Object.values(PagePath.loggedIn);
+  const cookies = request.cookies.getAll()
+  const { jwt, userId } = parseCookiesFromCookies(cookies)
+  const isLogin = !!jwt && !!userId
+  const { pathname } = request.nextUrl
+  const url = request.nextUrl.clone()
+  const loggedInPaths = Object.values(PagePath.loggedIn)
 
   if (loggedInPaths.includes(pathname) && !isLogin) {
-    url.pathname = PagePath.auth.login;
-    return NextResponse.redirect(url);
+    url.pathname = PagePath.auth.login
+    return NextResponse.redirect(url)
   }
 
   if (PagePath.auth.login === pathname && isLogin) {
-    url.pathname = PagePath.loggedIn.home;
-    return NextResponse.redirect(url);
+    url.pathname = PagePath.loggedIn.home
+    return NextResponse.redirect(url)
   }
 
-  return NextResponse.next();
+  return NextResponse.next()
 }
