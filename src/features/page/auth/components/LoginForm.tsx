@@ -62,13 +62,15 @@ const LoginForm = () => {
               id={form.id}
               onSubmit={form.onSubmit}
             >
-              {error && <div>{Object.values(error)[0]}</div>}
+              {error && (
+                <div className='mb-2 text-red-500'>{Object.values(error)[0]}</div>
+              )}
               <div className='mb-4'>
                 <Label className='block mb-2' htmlFor={fields.email.id}>
                   メールアドレス
                 </Label>
                 <Input id={fields.email.id} name={fields.email.name} type='email' />
-                <div>{fields.email.errors}</div>
+                <div className='mt-1 text-red-500'>{fields.email.errors}</div>
               </div>
               <div className='mb-4'>
                 <Label className='block mb-2' htmlFor={fields.password.id}>
@@ -79,7 +81,7 @@ const LoginForm = () => {
                   name={fields.password.name}
                   type='password'
                 />
-                <div>{fields.password.errors}</div>
+                <div className='mt-1 text-red-500'>{fields.password.errors}</div>
               </div>
               <Button>ログイン</Button>
             </form>
