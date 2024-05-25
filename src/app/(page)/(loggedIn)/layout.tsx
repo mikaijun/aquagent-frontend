@@ -20,8 +20,8 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang='ja'>
-      <body className='bg-gradient-to-b from-blue-50 to-sky-100 m-auto max-w-4xl font-sans h-screen'>
+    <html lang='en'>
+      <body>
         <header className='bg-blue-500 text-white text-center p-4 text-xl shadow-md'>
           <h1 className='font-semibold'>ホーム</h1>
         </header>
@@ -50,3 +50,5 @@ export default function RootLayout({
     </html>
   )
 }
+
+// className = 'bg-gradient-to-b from-blue-50 to-sky-100 m-auto max-w-4xl font-sans h-screen'

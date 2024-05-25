@@ -1,108 +1,51 @@
 'use client'
 
-import { SubmissionResult, useForm } from '@conform-to/react'
-import { parseWithZod } from '@conform-to/zod'
 import { useRouter } from 'next/navigation'
-import { useEffect } from 'react'
-import { useFormState } from 'react-dom'
+import { useCallback, useState } from 'react'
 
 import { Button } from '@/components/ui/button'
+import { Slider } from '@/components/ui/slider'
 
-import { WaterResponse, createWater } from '@/action/water'
-import { waterSchema } from '@/constants/zods'
+import { WaterResponse, saveWater } from '@/action/water'
 
 type WaterFormProps = {
   water?: WaterResponse
   onSave?: () => void
 }
 
-const wrapperStyle = 'flex justify-center items-center w-28 h-14'
-const labelStyle =
-  'text-center border-2 rounded-2xl  p-2 my-4 text-3xl peer-checked:bg-sky-500'
-
 const WaterForm: React.FC<WaterFormProps> = ({ water, onSave }) => {
+  const [volume, setVolume] = useState<number>(water?.Volume || 50)
   const router = useRouter()
-  const initialState: SubmissionResult<string[]> = {
-    initialValue: {
-      id: water?.ID.toString() || '',
-      volume: water?.Volume.toString() || '',
-    },
-  }
-  const [lastResult, action] = useFormState(createWater, initialState)
-  const [form, fields] = useForm({
-    lastResult,
-    onValidate({ formData }) {
-      return parseWithZod(formData, { schema: waterSchema })
-    },
-    shouldValidate: 'onSubmit',
-  })
 
-  useEffect(() => {
-    if (lastResult.status === 'success') {
-      alert(water ? '更新しました' : '登録しました')
+  const handleSave = useCallback(async () => {
+    const res = await saveWater({ id: water?.ID || 0, volume })
+    if (res) {
+      alert('保存しました')
       if (onSave) {
         onSave()
         router.refresh()
       }
     }
-  }, [lastResult, water, onSave, router])
+  }, [volume, water, onSave, router])
 
-  console.log(form.value?.volume)
+  const hoge = (value: number[]) => {
+    setVolume(value[0])
+  }
 
   return (
-    <form noValidate action={action} id={form.id} onSubmit={form.onSubmit}>
-      <div className='flex flex-wrap'>
-        <div className={wrapperStyle}>
-          <input
-            className='hidden peer'
-            id='100'
-            name={fields.volume.name}
-            type='radio'
-            value='100'
-          />
-          <label className={labelStyle} htmlFor='100'>
-            100ml
-          </label>
-        </div>
-        <div className={wrapperStyle}>
-          <input
-            className='hidden peer'
-            id='200'
-            name={fields.volume.name}
-            type='radio'
-            value='200'
-          />
-          <label className={labelStyle} htmlFor='200'>
-            200ml
-          </label>
-        </div>
-        <div className={wrapperStyle}>
-          <input
-            className='hidden peer'
-            id='500'
-            name={fields.volume.name}
-            type='radio'
-            value='500'
-          />
-          <label className={labelStyle} htmlFor='500'>
-            500ml
-          </label>
-        </div>
-        <div className={wrapperStyle}>
-          <input
-            className='hidden peer'
-            id='1000'
-            name={fields.volume.name}
-            type='radio'
-            value='1000'
-          />
-          <label className={labelStyle} htmlFor='1000'>
-            1,000ml
-          </label>
-        </div>
+    <div className='max-w-md'>
+      <div className='mb-4 relative h-20'>
+        <Slider max={500} min={50} step={50} onValueChange={hoge} />
+        <p className='my-2 text-center'>現在の量: {volume} ml</p>
+        <p className='absolute left-[10%]'>100</p>
+        <p className='absolute left-[43%]'>250</p>
+        <p className='absolute left-[92%]'>500</p>
+        <input name='volume' type='hidden' />
       </div>
-      <Button>{water ? '更新' : '作成'}</Button>
-    </form>
+      <Button className='block m-auto' onClick={handleSave}>
+        記録する
+      </Button>
+    </div>
   )
 }
 

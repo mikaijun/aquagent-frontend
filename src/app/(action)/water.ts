@@ -1,14 +1,11 @@
 'use server'
 
-import { SubmissionResult } from '@conform-to/react'
-import { parseWithZod } from '@conform-to/zod'
 import { cookies } from 'next/headers'
 import { NextResponse } from 'next/server'
 
 import { formatCookiesForHeader } from '@/utils/cookies'
 
 import { endPoint } from '@/constants/urls'
-import { waterSchema } from '@/constants/zods'
 
 export type WaterResponse = {
   ID: number
@@ -18,22 +15,15 @@ export type WaterResponse = {
   UpdatedAt: string
 }
 
-export async function createWater(
-  lastResult: SubmissionResult<string[]>,
-  formData: FormData,
-): Promise<SubmissionResult<string[]>> {
-  const submission = parseWithZod(formData, {
-    schema: waterSchema,
-  })
-
-  if (submission.status !== 'success') {
-    return submission.reply()
-  }
-  const id = lastResult?.initialValue ? (lastResult?.initialValue.id as number) : null
-
+export async function saveWater({
+  id,
+  volume,
+}: {
+  id: number
+  volume: number
+}): Promise<WaterResponse> {
   const url = id ? endPoint.loggedIn.water(id) : endPoint.loggedIn.waters
   const method = id ? 'PUT' : 'POST'
-
   const cookiesStore = cookies()
   const response = await fetch(url, {
     method,
@@ -43,13 +33,20 @@ export async function createWater(
     },
     credentials: 'include',
     body: JSON.stringify({
-      volume: Number(submission.value.volume),
+      volume,
     }),
   })
   if (response.status === 200) {
-    return { status: 'success' }
+    const data = (await response.json()) as WaterResponse
+    return data
   } else {
-    return { status: 'error', error: { message: ['登録に失敗しました'] } }
+    return {
+      ID: 0,
+      UserID: 0,
+      Volume: 0,
+      CreatedAt: '',
+      UpdatedAt: '',
+    }
   }
 }
 
