@@ -6,6 +6,8 @@ import { useRouter } from 'next/navigation'
 import { useEffect } from 'react'
 import { useFormState } from 'react-dom'
 
+import { Button } from '@/components/ui/button'
+
 import { WaterResponse, createWater } from '@/action/water'
 import { waterSchema } from '@/constants/zods'
 
@@ -13,6 +15,10 @@ type WaterFormProps = {
   water?: WaterResponse
   onSave?: () => void
 }
+
+const wrapperStyle = 'flex justify-center items-center w-28 h-14'
+const labelStyle =
+  'text-center border-2 rounded-2xl  p-2 my-4 text-3xl peer-checked:bg-sky-500'
 
 const WaterForm: React.FC<WaterFormProps> = ({ water, onSave }) => {
   const router = useRouter()
@@ -41,23 +47,61 @@ const WaterForm: React.FC<WaterFormProps> = ({ water, onSave }) => {
     }
   }, [lastResult, water, onSave, router])
 
+  console.log(form.value?.volume)
+
   return (
     <form noValidate action={action} id={form.id} onSubmit={form.onSubmit}>
-      <div>
-        <input name={fields.volume.name} type='radio' value='100' />
-        <label htmlFor={fields.volume.id}>100</label>
-        <div>{fields.volume.errors}</div>
-        <div>{fields.id.errors}</div>
+      <div className='flex flex-wrap'>
+        <div className={wrapperStyle}>
+          <input
+            className='hidden peer'
+            id='100'
+            name={fields.volume.name}
+            type='radio'
+            value='100'
+          />
+          <label className={labelStyle} htmlFor='100'>
+            100ml
+          </label>
+        </div>
+        <div className={wrapperStyle}>
+          <input
+            className='hidden peer'
+            id='200'
+            name={fields.volume.name}
+            type='radio'
+            value='200'
+          />
+          <label className={labelStyle} htmlFor='200'>
+            200ml
+          </label>
+        </div>
+        <div className={wrapperStyle}>
+          <input
+            className='hidden peer'
+            id='500'
+            name={fields.volume.name}
+            type='radio'
+            value='500'
+          />
+          <label className={labelStyle} htmlFor='500'>
+            500ml
+          </label>
+        </div>
+        <div className={wrapperStyle}>
+          <input
+            className='hidden peer'
+            id='1000'
+            name={fields.volume.name}
+            type='radio'
+            value='1000'
+          />
+          <label className={labelStyle} htmlFor='1000'>
+            1,000ml
+          </label>
+        </div>
       </div>
-      <div>
-        <input name={fields.volume.name} type='radio' value='200' />
-        <label htmlFor={fields.volume.id}>200</label>
-      </div>
-      <div>
-        <input name={fields.volume.name} type='radio' value='300' />
-        <label htmlFor={fields.volume.id}>300</label>
-      </div>
-      <button>{water ? '更新' : '作成'}</button>
+      <Button>{water ? '更新' : '作成'}</Button>
     </form>
   )
 }
