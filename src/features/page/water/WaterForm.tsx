@@ -33,13 +33,13 @@ const WaterForm: React.FC<WaterFormProps> = ({ water, onSave }) => {
   }
 
   return (
-    <div className='max-w-md'>
+    <div className='max-w-4xl'>
       <div className='mb-4 relative h-20'>
         <Slider max={500} min={50} step={50} onValueChange={hoge} />
         <p className='my-2 text-center'>現在の量: {volume} ml</p>
-        <p className='absolute left-[10%]'>100</p>
-        <p className='absolute left-[43%]'>250</p>
-        <p className='absolute left-[92%]'>500</p>
+        <p className='absolute left-[15%] -translate-x-1/2'>100</p>
+        <p className='absolute left-[50%] -translate-x-1/2'>250</p>
+        <p className='absolute left-[98%] -translate-x-1/2'>500</p>
         <input name='volume' type='hidden' />
       </div>
       <Button className='block m-auto' onClick={handleSave}>
