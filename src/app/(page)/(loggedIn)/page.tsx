@@ -29,7 +29,7 @@ export default async function Home() {
       </p>
       <p className='text-4xl font-extrabold text-center text-blue-700 mb-4'>{total}ml</p>
       <WaterList
-        className='max-w-lg mx-auto bg-white shadow-lg rounded-lg p-6'
+        className='max-w-lg mx-auto bg-white shadow-lg rounded-lg p-6 shadow-2xl'
         waters={waters}
       />
     </div>

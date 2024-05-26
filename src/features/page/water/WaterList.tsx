@@ -7,7 +7,6 @@ import { ScrollArea } from '@/components/ui/scroll-area'
 import { Separator } from '@/components/ui/separator'
 
 import { WaterResponse } from '@/app/(action)/water'
-import { cn } from '@/lib/utils'
 
 export const metadata: Metadata = {
   title: 'ホーム',
@@ -20,7 +19,7 @@ type WaterListProps = {
 
 const WaterList: React.FC<WaterListProps> = ({ waters, className }) => {
   return (
-    <Card className={cn('p-4 shadow-lg', className)}>
+    <Card className={className}>
       <ScrollArea className='h-52'>
         {waters.map((water) => (
           <>
