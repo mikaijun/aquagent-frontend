@@ -2,6 +2,7 @@ import { FaHome } from 'react-icons/fa'
 import { IoIosWater, IoMdSettings } from 'react-icons/io'
 
 import { Card, CardContent } from '@/components/ui/card'
+import { Toaster } from '@/components/ui/toaster'
 
 import type { Metadata } from 'next'
 
@@ -22,6 +23,7 @@ export default function RootLayout({
   return (
     <html lang='en'>
       <body>
+        <Toaster />
         <div className='bg-gradient-to-b from-blue-50 to-sky-100 m-auto max-w-4xl font-sans h-screen'>
           <header className='bg-blue-500 text-white text-center p-4 text-xl shadow-md'>
             <h1 className='font-cursive'>ホーム</h1>

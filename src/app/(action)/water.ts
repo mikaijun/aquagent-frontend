@@ -64,10 +64,21 @@ export async function deleteWater({ id }: { id: number }) {
   return response.status === 200
 }
 
-export async function fetchWaters(): Promise<NextResponse<WaterResponse[]>> {
+export async function fetchWaters({
+  date,
+  month,
+}: {
+  date?: string
+  month?: string
+}): Promise<NextResponse<WaterResponse[]>> {
   const cookiesStore = cookies()
+  const url = date
+    ? endPoint.loggedIn.watersFilterDate(date)
+    : month
+      ? endPoint.loggedIn.watersFilterMonth(month)
+      : endPoint.loggedIn.waters
   try {
-    const response = await fetch(endPoint.loggedIn.waters, {
+    const response = await fetch(url, {
       headers: {
         'Content-Type': 'application/json',
         Cookie: formatCookiesForHeader(cookiesStore),
