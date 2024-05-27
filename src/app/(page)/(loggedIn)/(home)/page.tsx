@@ -5,13 +5,13 @@ import { Card } from '@/components/ui/card'
 
 import { WaterResponse, fetchWaters } from '@/app/(action)/water'
 import WaterForm from '@/page/water/WaterForm'
-import WaterList from '@/pagewater/WaterList'
+import WaterScrollArea from '@/page/water/WaterScrollArea'
 
 export const metadata: Metadata = {
   title: 'ホーム',
 }
 
-export default async function Home() {
+const HomePage = async () => {
   const today = dayjs().format('YYYY-MM-DD')
   const res = await fetchWaters({ date: today })
   const waters = (await res.json()) as WaterResponse[]
@@ -28,10 +28,12 @@ export default async function Home() {
         本日の水分量
       </p>
       <p className='text-4xl font-extrabold text-center text-blue-700 mb-4'>{total}ml</p>
-      <WaterList
+      <WaterScrollArea
         className='max-w-lg mx-auto bg-white shadow-lg rounded-lg p-6 shadow-2xl'
         waters={waters}
       />
     </div>
   )
 }
+
+export default HomePage

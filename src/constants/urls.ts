@@ -6,7 +6,8 @@ export const PagePath = {
   },
   loggedIn: {
     home: '/',
-    water: '/water',
+    list: '/list',
+    listWithDate: (date: string) => `/list?date=${date}`,
   },
 }
 
