@@ -64,3 +64,15 @@ export async function logout() {
   cookies().delete(USER_ID)
   redirect(PagePath.auth.login)
 }
+
+export async function cron() {
+  const cookiesStore = cookies()
+  await fetch(endPoint.auth.cron, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+      Cookie: formatCookiesForHeader(cookiesStore),
+    },
+    credentials: 'include',
+  })
+}

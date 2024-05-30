@@ -1,17 +1,13 @@
-import { Metadata } from 'next'
+'use client'
 
-import { endPoint } from '@/constants/urls'
+import { useEffect } from 'react'
 
-export const metadata: Metadata = {
-  title: 'みずとも',
-}
+import { cron } from '@/app/(action)/auth'
 
 // NOTE: Render.comのスリープ対策のため、定期的にアクセスするページ
-export default async function CronPage() {
-  await fetch(endPoint.auth.cron, {
-    headers: {
-      'Content-Type': 'application/json',
-    },
-  })
+export default function CronPage() {
+  useEffect(() => {
+    void cron()
+  }, [])
   return <div />
 }
