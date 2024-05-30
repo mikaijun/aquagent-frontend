@@ -14,7 +14,6 @@ export const PagePath = {
 export const endPoint = {
   auth: {
     login: `${baseurl}/login`,
-    cron: `${baseurl}/cron`,
   },
   loggedIn: {
     users: `${baseurl}/v1/users`,
