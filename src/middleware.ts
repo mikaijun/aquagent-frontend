@@ -13,13 +13,14 @@ export function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl
   const url = request.nextUrl.clone()
   const loggedInPaths = Object.values(PagePath.loggedIn)
+  const authPaths = Object.values(PagePath.auth)
 
   if (loggedInPaths.includes(pathname) && !isLogin) {
     url.pathname = PagePath.auth.login
     return NextResponse.redirect(url)
   }
 
-  if (PagePath.auth.login === pathname && isLogin) {
+  if (authPaths.includes(pathname) && isLogin) {
     url.pathname = PagePath.loggedIn.home
     return NextResponse.redirect(url)
   }

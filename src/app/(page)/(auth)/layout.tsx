@@ -1,4 +1,7 @@
+import { Toaster } from '@/components/ui/toaster'
+
 import type { Metadata } from 'next'
+
 import '@/app/globals.css'
 
 export const metadata: Metadata = {
@@ -13,8 +16,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang='en'>
-      <body className='bg-gradient-to-b from-blue-50 to-sky-100 h-screen'>
-        {children}
+      <body>
+        <Toaster />
+        <div className='bg-gradient-to-b from-blue-50 to-sky-100 h-screen'>
+          {children}
+        </div>
       </body>
     </html>
   )

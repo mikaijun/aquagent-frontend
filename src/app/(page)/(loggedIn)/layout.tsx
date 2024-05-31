@@ -42,50 +42,46 @@ export default function RootLayout({
   const headersList = headers()
   const pathName = headersList.get('path-name') || ''
   return (
-    <html lang='en'>
-      <body>
-        <Toaster />
-        <div className='bg-gradient-to-b from-blue-50 to-sky-100'>
-          <div className='m-auto max-w-4xl font-sans h-screen'>
-            <header className='bg-blue-400 text-white text-center p-4 text-xl shadow-md'>
-              <h1 className='font-cursive'>{headerTitle(pathName)}</h1>
-            </header>
-            <main>{children}</main>
-            <footer className='fixed bottom-0 max-w-4xl w-full'>
-              <Card className='bg-gray-100 border-t-2 border-gray-200 rounded-none m-auto shadow-md'>
-                <CardContent className='py-3 text-center text-gray-300'>
-                  <div className='flex justify-around space-x-6'>
-                    <a
-                      className={cn(
-                        footerLinkStyle,
-                        textColor(pathName, PagePath.loggedIn.home),
-                      )}
-                      href={PagePath.loggedIn.home}
-                    >
-                      <FaHome className='mb-1 text-2xl' />
-                      <p className='text-xs'>ホーム</p>
-                    </a>
-                    <a
-                      className={cn(
-                        footerLinkStyle,
-                        textColor(pathName, PagePath.loggedIn.list),
-                      )}
-                      href={PagePath.loggedIn.list}
-                    >
-                      <IoIosWater className='mb-1 text-2xl' />
-                      <p className='text-xs'>水分管理</p>
-                    </a>
-                    <a className={cn(footerLinkStyle, textColor(pathName, ''))} href='#'>
-                      <IoMdSettings className='mb-1 text-2xl' />
-                      <p className='text-xs'>設定</p>
-                    </a>
-                  </div>
-                </CardContent>
-              </Card>
-            </footer>
-          </div>
-        </div>
-      </body>
-    </html>
+    <div className='bg-gradient-to-b from-blue-50 to-sky-100'>
+      <Toaster />
+      <div className='m-auto max-w-4xl font-sans h-screen'>
+        <header className='bg-blue-400 text-white text-center p-4 text-xl shadow-md'>
+          <h1 className='font-cursive'>{headerTitle(pathName)}</h1>
+        </header>
+        <main>{children}</main>
+        <footer className='fixed bottom-0 max-w-4xl w-full'>
+          <Card className='bg-gray-100 border-t-2 border-gray-200 rounded-none m-auto shadow-md'>
+            <CardContent className='py-3 text-center text-gray-300'>
+              <div className='flex justify-around space-x-6'>
+                <a
+                  className={cn(
+                    footerLinkStyle,
+                    textColor(pathName, PagePath.loggedIn.home),
+                  )}
+                  href={PagePath.loggedIn.home}
+                >
+                  <FaHome className='mb-1 text-2xl' />
+                  <p className='text-xs'>ホーム</p>
+                </a>
+                <a
+                  className={cn(
+                    footerLinkStyle,
+                    textColor(pathName, PagePath.loggedIn.list),
+                  )}
+                  href={PagePath.loggedIn.list}
+                >
+                  <IoIosWater className='mb-1 text-2xl' />
+                  <p className='text-xs'>水分管理</p>
+                </a>
+                <a className={cn(footerLinkStyle, textColor(pathName, ''))} href='#'>
+                  <IoMdSettings className='mb-1 text-2xl' />
+                  <p className='text-xs'>設定</p>
+                </a>
+              </div>
+            </CardContent>
+          </Card>
+        </footer>
+      </div>
+    </div>
   )
 }

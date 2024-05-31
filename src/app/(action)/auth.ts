@@ -13,13 +13,12 @@ import {
 } from '@/utils/cookies'
 
 import { PagePath, endPoint } from '@/constants/urls'
-import { loginSchema } from '@/constants/zods'
+import { loginSchema, signupSchema } from '@/constants/zods'
 
 export async function login(
   _: unknown,
   formData: FormData,
 ): Promise<SubmissionResult<string[]>> {
-  console.log(formData)
   const submission = parseWithZod(formData, {
     schema: loginSchema,
   })
@@ -40,7 +39,7 @@ export async function login(
     const { jwt, userId } = parseCookiesFromHeaders(response.headers)
     cookies().set(JWT, jwt)
     cookies().set(USER_ID, userId)
-    redirect('/')
+    redirect(PagePath.loggedIn.home)
   } else {
     return {
       status: 'error',
@@ -63,4 +62,34 @@ export async function logout() {
   cookies().delete(JWT)
   cookies().delete(USER_ID)
   redirect(PagePath.auth.login)
+}
+
+export async function signup(
+  _: unknown,
+  formData: FormData,
+): Promise<SubmissionResult<string[]>> {
+  const submission = parseWithZod(formData, {
+    schema: signupSchema,
+  })
+
+  if (submission.status !== 'success') {
+    return submission.reply()
+  }
+
+  const response = await fetch(endPoint.auth.signup, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    credentials: 'include',
+    body: JSON.stringify(submission.value),
+  })
+  if (response.status === 200) {
+    redirect(PagePath.auth.loginWhenSignup)
+  } else {
+    return {
+      status: 'error',
+      error: { message: ['メールアドレスかパスワードが誤ってます'] },
+    }
+  }
 }

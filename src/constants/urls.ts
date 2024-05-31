@@ -3,6 +3,8 @@ const baseurl = process.env.NEXT_PUBLIC_API_ENDPOINT
 export const PagePath = {
   auth: {
     login: '/login',
+    loginWhenSignup: '/login?signup=true',
+    signup: '/signup',
   },
   loggedIn: {
     home: '/',
@@ -14,6 +16,7 @@ export const PagePath = {
 export const endPoint = {
   auth: {
     login: `${baseurl}/login`,
+    signup: `${baseurl}/signup`,
   },
   loggedIn: {
     users: `${baseurl}/v1/users`,
