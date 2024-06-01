@@ -3,7 +3,7 @@
 import { SubmissionResult, useForm } from '@conform-to/react'
 import { parseWithZod } from '@conform-to/zod'
 import Link from 'next/link'
-import { useRouter, useSearchParams } from 'next/navigation'
+import { useRouter } from 'next/navigation'
 import { useCallback, useEffect } from 'react'
 import { useFormState } from 'react-dom'
 
@@ -29,11 +29,12 @@ const initialState: SubmissionResult<string[]> = {
     password: '',
   },
 }
+type LoginFormProps = {
+  query: string
+}
 
-const LoginForm = () => {
+const LoginForm: React.FC<LoginFormProps> = ({ query }) => {
   const router = useRouter()
-  const searchParams = useSearchParams()
-  const query = searchParams.get('signup') ?? ''
   const { toast } = useToast()
   const [lastResult, action] = useFormState(login, initialState)
   const { error } = lastResult

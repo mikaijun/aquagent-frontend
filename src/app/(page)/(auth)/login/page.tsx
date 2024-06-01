@@ -9,7 +9,11 @@ export const metadata: Metadata = {
   title: 'ログイン',
 }
 
-export default function LoginPage() {
+export default function LoginPage({
+  searchParams,
+}: {
+  searchParams?: { signup: string }
+}) {
   return (
     <div className='py-20 px-4'>
       <Image
@@ -24,7 +28,7 @@ export default function LoginPage() {
           <CardTitle>ログイン</CardTitle>
         </CardHeader>
         <CardContent className='p-4'>
-          <LoginForm />
+          <LoginForm query={searchParams?.signup ?? ''} />
         </CardContent>
       </Card>
     </div>
