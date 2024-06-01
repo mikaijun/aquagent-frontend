@@ -1,12 +1,13 @@
 import { headers } from 'next/headers'
 import { FaHome } from 'react-icons/fa'
-import { IoIosWater, IoMdSettings } from 'react-icons/io'
+import { IoIosWater } from 'react-icons/io'
 
 import { Card, CardContent } from '@/components/ui/card'
 import { Toaster } from '@/components/ui/toaster'
 
 import { PagePath } from '@/constants/urls'
 import { cn } from '@/lib/utils'
+import { SettingSheet } from '@/page/setting/SettingSheet'
 
 import type { Metadata } from 'next'
 
@@ -73,10 +74,9 @@ export default function RootLayout({
                   <IoIosWater className='mb-1 text-2xl' />
                   <p className='text-xs'>水分管理</p>
                 </a>
-                <a className={cn(footerLinkStyle, textColor(pathName, ''))} href='#'>
-                  <IoMdSettings className='mb-1 text-2xl' />
-                  <p className='text-xs'>設定</p>
-                </a>
+                <div>
+                  <SettingSheet />
+                </div>
               </div>
             </CardContent>
           </Card>
