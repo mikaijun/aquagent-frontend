@@ -33,7 +33,7 @@ const WaterList: React.FC<WaterListProps> = ({ waters, date }) => {
         <button className='p-2' onClick={handlePreviousDay}>
           <ArrowLeftIcon className='h-6 w-6 text-gray-800' />
         </button>
-        <p className='text-4xl font-extrabold text-center text-gray-800 mx-4'>
+        <p className='text-3xl font-extrabold text-center text-gray-800 mx-4'>
           {dayjs(date).format('YYYY年MM月DD日')}
         </p>
         <button className='p-2' onClick={handleNextDay}>
