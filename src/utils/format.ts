@@ -19,3 +19,13 @@ export const formatDataWithTime = (data: string | null): string => {
   }
   return ''
 }
+
+/**
+ * 指定した日時からHH:mmに変換する
+ */
+export const formatTime = (data: string | null): string => {
+  if (dayjs(data).isValid()) {
+    return dayjs(data).format('HH:mm')
+  }
+  return ''
+}
