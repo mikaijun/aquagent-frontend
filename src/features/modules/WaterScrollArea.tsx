@@ -2,7 +2,7 @@ import { useRouter } from 'next/navigation'
 import React, { useCallback } from 'react'
 import { FaTrash } from 'react-icons/fa'
 
-import { formatDataJapaneseWithTime, formatTime } from '@/utils/format'
+import { formatTime } from '@/utils/format'
 
 import { Card } from '@/components/ui/card'
 import { ScrollArea } from '@/components/ui/scroll-area'
