@@ -2,7 +2,7 @@ import dayjs from 'dayjs'
 import { Metadata } from 'next'
 
 import { WaterResponse, fetchWaters } from '@/app/(action)/water'
-import WaterList from '@/page/water/WaterList'
+import WaterList from '@/features/WaterList'
 
 export const metadata: Metadata = {
   title: '一覧',

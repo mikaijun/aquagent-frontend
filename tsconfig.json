@@ -20,8 +20,8 @@
     "paths": {
       "@/app/*": ["./src/app/*"],
       "@/action/*": ["./src/app/(action)/*"],
-      "@/page*": ["./src/features/page/*"],
-      "@/common*": ["./src/features/common/*"],
+      "@/features/*": ["./src/features/*"],
+      "@/modules/*": ["./src/features/modules/*"],
       "@/constants/*": ["./src/constants/*"],
       "@/utils/*": ["./src/utils/*"],
       "@/lib/*": ["./src/lib/*"],

@@ -3,7 +3,7 @@ import Image from 'next/image'
 
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 
-import SignupForm from '@/page/auth/components/SignupForm'
+import SignupForm from '@/features/SignupForm'
 
 export const metadata: Metadata = {
   title: '新規作成',

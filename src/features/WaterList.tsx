@@ -6,7 +6,7 @@ import { useRouter } from 'next/navigation'
 
 import { WaterResponse } from '@/app/(action)/water'
 import { PagePath } from '@/constants/urls'
-import WaterScrollArea from '@/page/water/WaterScrollArea'
+import WaterScrollArea from '@/modules/WaterScrollArea'
 
 type WaterListProps = {
   waters: WaterResponse[]

@@ -3,7 +3,7 @@ import Image from 'next/image'
 
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 
-import LoginForm from '@/page/auth/components/LoginForm'
+import LoginForm from '@/features/LoginForm'
 
 export const metadata: Metadata = {
   title: 'ログイン',
