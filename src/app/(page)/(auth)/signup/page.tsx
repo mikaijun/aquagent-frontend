@@ -3,7 +3,7 @@ import Image from 'next/image'
 
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 
-import SignupForm from '@/features/SignupForm'
+import SignupFormPage from '@/features/SignupFormPage'
 
 export const metadata: Metadata = {
   title: '新規作成',
@@ -24,7 +24,7 @@ export default function SignupPage() {
           <CardTitle>新規作成</CardTitle>
         </CardHeader>
         <CardContent className='p-4'>
-          <SignupForm />
+          <SignupFormPage />
         </CardContent>
       </Card>
     </div>

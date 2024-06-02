@@ -8,12 +8,12 @@ import { WaterResponse } from '@/app/(action)/water'
 import { PagePath } from '@/constants/urls'
 import WaterScrollArea from '@/modules/WaterScrollArea'
 
-type WaterListProps = {
+type WaterListPageProps = {
   waters: WaterResponse[]
   date: string
 }
 
-const WaterList: React.FC<WaterListProps> = ({ waters, date }) => {
+const WaterListPage: React.FC<WaterListPageProps> = ({ waters, date }) => {
   const total = waters.reduce((acc, cur) => acc + cur.Volume, 0)
   const router = useRouter()
 
@@ -50,4 +50,4 @@ const WaterList: React.FC<WaterListProps> = ({ waters, date }) => {
   )
 }
 
-export default WaterList
+export default WaterListPage

@@ -3,7 +3,7 @@ import Image from 'next/image'
 
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 
-import LoginForm from '@/features/LoginForm'
+import LoginFormPage from '@/features/LoginFormPage'
 
 export const metadata: Metadata = {
   title: 'ログイン',
@@ -28,7 +28,7 @@ export default function LoginPage({
           <CardTitle>ログイン</CardTitle>
         </CardHeader>
         <CardContent className='p-4'>
-          <LoginForm query={searchParams?.signup ?? ''} />
+          <LoginFormPage query={searchParams?.signup ?? ''} />
         </CardContent>
       </Card>
     </div>

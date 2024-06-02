@@ -29,11 +29,11 @@ const initialState: SubmissionResult<string[]> = {
     password: '',
   },
 }
-type LoginFormProps = {
+type LoginFormPageProps = {
   query: string
 }
 
-const LoginForm: React.FC<LoginFormProps> = ({ query }) => {
+const LoginFormPage: React.FC<LoginFormPageProps> = ({ query }) => {
   const router = useRouter()
   const { toast } = useToast()
   const [lastResult, action] = useFormState(login, initialState)
@@ -115,4 +115,4 @@ const LoginForm: React.FC<LoginFormProps> = ({ query }) => {
   )
 }
 
-export default LoginForm
+export default LoginFormPage

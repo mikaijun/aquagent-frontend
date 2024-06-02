@@ -20,7 +20,7 @@ const initialState: SubmissionResult<string[]> = {
   },
 }
 
-const SignupForm = () => {
+const SignupFormPage = () => {
   const [lastResult, action] = useFormState(signup, initialState)
   const { error } = lastResult
   const [form, fields] = useForm({
@@ -68,4 +68,4 @@ const SignupForm = () => {
   )
 }
 
-export default SignupForm
+export default SignupFormPage

@@ -15,18 +15,10 @@ export type WaterResponse = {
   DrankAt: string
 }
 
-export async function saveWater({
-  id,
-  volume,
-}: {
-  id: number
-  volume: number
-}): Promise<WaterResponse> {
-  const url = id ? endPoint.loggedIn.water(id) : endPoint.loggedIn.waters
-  const method = id ? 'PUT' : 'POST'
+export async function saveWater({ volume }: { volume: number }): Promise<WaterResponse> {
   const cookiesStore = cookies()
-  const response = await fetch(url, {
-    method,
+  const response = await fetch(endPoint.loggedIn.waters, {
+    method: 'POST',
     headers: {
       'Content-Type': 'application/json',
       Cookie: formatCookiesForHeader(cookiesStore),
