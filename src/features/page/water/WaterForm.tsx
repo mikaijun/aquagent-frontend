@@ -35,7 +35,7 @@ const WaterForm: React.FC<WaterFormProps> = ({ water, onSave }) => {
 
   const handleSave = useCallback(async () => {
     const res = await saveWater({ id: water?.ID || 0, volume: Number(volume) })
-    if (res) {
+    if (res.ID > 0) {
       toast({ title: '保存しました' })
       router.refresh()
       if (onSave) {

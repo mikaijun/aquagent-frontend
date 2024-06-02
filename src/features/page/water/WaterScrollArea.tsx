@@ -26,7 +26,7 @@ const WaterScrollArea: React.FC<WaterScrollAreaProps> = ({
           <React.Fragment key={index}>
             <div key={water.ID} className='text-sm flex'>
               <p className='w-20'>{water.Volume} ml</p>
-              <p>{formatDataJapaneseWithTime(water.CreatedAt)}</p>
+              <p>{formatDataJapaneseWithTime(water.DrankAt)}</p>
             </div>
             <Separator className='my-2' />
           </React.Fragment>

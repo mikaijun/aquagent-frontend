@@ -4,6 +4,7 @@ import { cookies } from 'next/headers'
 import { NextResponse } from 'next/server'
 
 import { formatCookiesForHeader } from '@/utils/cookies'
+import { formatDataWithTime } from '@/utils/format'
 
 import { endPoint } from '@/constants/urls'
 
@@ -11,8 +12,7 @@ export type WaterResponse = {
   ID: number
   UserID: number
   Volume: number
-  CreatedAt: string
-  UpdatedAt: string
+  DrankAt: string
 }
 
 export async function saveWater({
@@ -34,6 +34,8 @@ export async function saveWater({
     credentials: 'include',
     body: JSON.stringify({
       volume,
+      // TODO: 指定できるようにする
+      drank_at: formatDataWithTime(new Date().toISOString()),
     }),
   })
   if (response.status === 200) {
@@ -44,8 +46,7 @@ export async function saveWater({
       ID: 0,
       UserID: 0,
       Volume: 0,
-      CreatedAt: '',
-      UpdatedAt: '',
+      DrankAt: '',
     }
   }
 }

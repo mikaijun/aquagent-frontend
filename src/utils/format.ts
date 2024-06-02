@@ -9,3 +9,13 @@ export const formatDataJapaneseWithTime = (data: string | null): string => {
   }
   return ''
 }
+
+/**
+ * 指定した日付をYYYY-MM-DD HH:mmに変換する
+ */
+export const formatDataWithTime = (data: string | null): string => {
+  if (dayjs(data).isValid()) {
+    return dayjs(data).format('YYYY-MM-DD HH:mm')
+  }
+  return ''
+}

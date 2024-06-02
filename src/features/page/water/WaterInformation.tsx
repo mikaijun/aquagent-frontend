@@ -38,7 +38,7 @@ const WaterInformation: React.FC<WaterInformationProps> = ({ water }) => {
       ) : (
         <>
           <li>{water.Volume}</li>
-          <li>{water.CreatedAt}</li>
+          <li>{water.DrankAt}</li>
           <button onClick={handleChangeEditMode}>編集</button>
           <button onClick={handleDelete}>削除</button>
         </>
