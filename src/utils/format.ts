@@ -1,16 +1,16 @@
-import dayjs, { Dayjs } from 'dayjs'
+import dayjs from 'dayjs'
 // NOTE: Vercel デフォルトでTimezoneがUTCにならないようにする
 // https://zenn.dev/kohki_s/articles/a77ac4badf0f3c
 import timezone from 'dayjs/plugin/timezone'
-import ja from 'dayjs/plugin/utc'
-dayjs.extend(ja)
+import utc from 'dayjs/plugin/utc'
+dayjs.extend(utc)
 dayjs.extend(timezone)
 
 /**
- * 今日の日付を取得する
+ * 今日の日付を取得し、YYYY-MM-DDに変換する
  */
-export const getToday = (): Dayjs => {
-  return dayjs()
+export const formatToday = (): string => {
+  return dayjs().tz('Asia/Tokyo').format('YYYY-MM-DD')
 }
 
 /**
@@ -18,7 +18,7 @@ export const getToday = (): Dayjs => {
  */
 export const formatData = (data: string | null): string => {
   if (dayjs(data).isValid()) {
-    return dayjs(data).format('YYYY-MM-DD')
+    return dayjs(data).tz('Asia/Tokyo').format('YYYY-MM-DD')
   }
   return ''
 }
@@ -28,7 +28,7 @@ export const formatData = (data: string | null): string => {
  */
 export const formatDataWithTime = (data: string | null): string => {
   if (dayjs(data).isValid()) {
-    return dayjs(data).format('YYYY-MM-DD HH:mm')
+    return dayjs(data).tz('Asia/Tokyo').format('YYYY-MM-DD HH:mm')
   }
   return ''
 }
@@ -38,7 +38,7 @@ export const formatDataWithTime = (data: string | null): string => {
  */
 export const formatTime = (data: string | null): string => {
   if (dayjs(data).isValid()) {
-    return dayjs(data).format('HH:mm')
+    return dayjs(data).tz('Asia/Tokyo').format('HH:mm')
   }
   return ''
 }
@@ -48,7 +48,7 @@ export const formatTime = (data: string | null): string => {
  */
 export const addOneDay = (date: string): string => {
   if (dayjs(date).isValid()) {
-    return dayjs(date).add(1, 'day').toString()
+    return dayjs(date).tz('Asia/Tokyo').add(1, 'day').toString()
   }
   return ''
 }
@@ -58,7 +58,7 @@ export const addOneDay = (date: string): string => {
  */
 export const subtractOneDay = (date: string): string => {
   if (dayjs(date).isValid()) {
-    return dayjs(date).subtract(1, 'day').toString()
+    return dayjs(date).tz('Asia/Tokyo').subtract(1, 'day').toString()
   }
   return ''
 }
