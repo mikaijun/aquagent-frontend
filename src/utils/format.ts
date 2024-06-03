@@ -2,8 +2,8 @@ import dayjs, { Dayjs } from 'dayjs'
 // NOTE: Vercel デフォルトでTimezoneがUTCにならないようにする
 // https://zenn.dev/kohki_s/articles/a77ac4badf0f3c
 import timezone from 'dayjs/plugin/timezone'
-import utc from 'dayjs/plugin/utc'
-dayjs.extend(utc)
+import ja from 'dayjs/plugin/utc'
+dayjs.extend(ja)
 dayjs.extend(timezone)
 
 /**
