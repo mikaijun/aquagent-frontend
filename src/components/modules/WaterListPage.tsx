@@ -6,12 +6,12 @@ import { GoPlus } from 'react-icons/go'
 
 import { addOneDay, formatData, subtractOneDay } from '@/utils/format'
 
+import { WaterFormSheet } from '@/components/modules/WaterFormSheet'
+import { WaterScrollArea } from '@/components/modules/WaterScrollArea'
 import { SheetTrigger } from '@/components/ui/sheet'
 
 import { WaterResponse } from '@/app/(action)/water'
 import { PagePath } from '@/constants/urls'
-import { WaterFormSheet } from '@/features/WaterFormSheet'
-import { WaterScrollArea } from '@/modules/WaterScrollArea'
 
 type WaterListPageProps = {
   waters: WaterResponse[]

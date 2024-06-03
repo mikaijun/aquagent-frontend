@@ -5,12 +5,12 @@ import { IoIosArrowForward } from 'react-icons/io'
 
 import { formatToday } from '@/utils/format'
 
+import { WaterFormSheet } from '@/components/modules/WaterFormSheet'
 import { Card } from '@/components/ui/card'
 import { SheetTrigger } from '@/components/ui/sheet'
 
 import { WaterResponse, fetchWaters } from '@/app/(action)/water'
 import { PagePath } from '@/constants/urls'
-import { WaterFormSheet } from '@/features/WaterFormSheet'
 
 export const metadata: Metadata = {
   title: 'ホーム',

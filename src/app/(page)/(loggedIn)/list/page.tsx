@@ -2,8 +2,9 @@ import { Metadata } from 'next'
 
 import { formatToday } from '@/utils/format'
 
+import WaterListPage from '@/components/modules/WaterListPage'
+
 import { WaterResponse, fetchWaters } from '@/app/(action)/water'
-import WaterListPage from '@/features/WaterListPage'
 
 export const metadata: Metadata = {
   title: '一覧',

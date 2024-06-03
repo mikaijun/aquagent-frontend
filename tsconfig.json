@@ -20,7 +20,6 @@
     "paths": {
       "@/app/*": ["./src/app/*"],
       "@/action/*": ["./src/app/(action)/*"],
-      "@/features/*": ["./src/features/*"],
       "@/modules/*": ["./src/features/modules/*"],
       "@/constants/*": ["./src/constants/*"],
       "@/utils/*": ["./src/utils/*"],

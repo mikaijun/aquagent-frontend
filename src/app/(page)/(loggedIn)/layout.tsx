@@ -2,11 +2,11 @@ import { headers } from 'next/headers'
 import { FaHome } from 'react-icons/fa'
 import { IoIosWater } from 'react-icons/io'
 
+import { SettingSheet } from '@/components/modules/SettingSheet'
 import { Card, CardContent } from '@/components/ui/card'
 import { Toaster } from '@/components/ui/toaster'
 
 import { PagePath } from '@/constants/urls'
-import { SettingSheet } from '@/features/SettingSheet'
 import { cn } from '@/lib/utils'
 
 import type { Metadata } from 'next'

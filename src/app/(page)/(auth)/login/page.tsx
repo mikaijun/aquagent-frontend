@@ -1,9 +1,8 @@
 import { Metadata } from 'next'
 import Image from 'next/image'
 
+import LoginFormPage from '@/components/modules/LoginFormPage'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-
-import LoginFormPage from '@/features/LoginFormPage'
 
 export const metadata: Metadata = {
   title: 'ログイン',

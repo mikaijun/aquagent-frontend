@@ -1,9 +1,8 @@
 import { Metadata } from 'next'
 import Image from 'next/image'
 
+import SignupFormPage from '@/components/modules/SignupFormPage'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-
-import SignupFormPage from '@/features/SignupFormPage'
 
 export const metadata: Metadata = {
   title: '新規作成',
