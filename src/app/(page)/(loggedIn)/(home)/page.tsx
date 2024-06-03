@@ -1,8 +1,9 @@
-import dayjs from 'dayjs'
 import { Metadata } from 'next'
 import React from 'react'
 import { GoPlus } from 'react-icons/go'
 import { IoIosArrowForward } from 'react-icons/io'
+
+import { getToday } from '@/utils/format'
 
 import { Card } from '@/components/ui/card'
 import { SheetTrigger } from '@/components/ui/sheet'
@@ -16,7 +17,7 @@ export const metadata: Metadata = {
 }
 
 const HomePage = async () => {
-  const today = dayjs().format('YYYY-MM-DD')
+  const today = getToday().format('YYYY-MM-DD')
   const res = await fetchWaters({ date: today })
   const waters = (await res.json()) as WaterResponse[]
   const total = waters.reduce((acc, cur) => acc + cur.Volume, 0)
