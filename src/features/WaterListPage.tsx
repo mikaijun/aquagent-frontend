@@ -2,11 +2,15 @@
 
 import { ArrowLeftIcon, ArrowRightIcon } from 'lucide-react'
 import { useRouter } from 'next/navigation'
+import { GoPlus } from 'react-icons/go'
 
 import { addOneDay, formatData, subtractOneDay } from '@/utils/format'
 
+import { SheetTrigger } from '@/components/ui/sheet'
+
 import { WaterResponse } from '@/app/(action)/water'
 import { PagePath } from '@/constants/urls'
+import { WaterFormSheet } from '@/features/WaterFormSheet'
 import { WaterScrollArea } from '@/modules/WaterScrollArea'
 
 type WaterListPageProps = {
@@ -41,7 +45,18 @@ const WaterListPage: React.FC<WaterListPageProps> = ({ waters, date }) => {
           <ArrowRightIcon className='h-6 w-6 text-gray-800' />
         </button>
       </div>
-      <p className='text-4xl font-extrabold text-center text-blue-700 mb-4'>{total}ml</p>
+      <div className='flex items-center justify-between mb-4'>
+        <p className='text-4xl font-extrabold text-blue-700 flex-1 text-center'>
+          {total}ml
+        </p>
+        <WaterFormSheet>
+          <SheetTrigger>
+            <div className='bg-primary text-white rounded-lg p-1'>
+              <GoPlus size='30px' />
+            </div>
+          </SheetTrigger>
+        </WaterFormSheet>
+      </div>
       <WaterScrollArea
         className='max-w-lg mx-auto bg-white shadow-lg rounded-lg p-6 shadow-2xl'
         scrollAreaHeight='h-[480px]'
