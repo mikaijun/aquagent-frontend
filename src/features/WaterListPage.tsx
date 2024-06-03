@@ -16,7 +16,9 @@ type WaterListPageProps = {
 const WaterListPage: React.FC<WaterListPageProps> = ({ waters, date }) => {
   const total = waters.reduce((acc, cur) => acc + cur.Volume, 0)
   const router = useRouter()
+  console.log(date)
   console.log(dayjs().format('YYYY-MM-DD HH:mm:ss'))
+  console.log(dayjs(date).format('YYYY年MM月DD日'))
 
   const handlePreviousDay = () => {
     const targetDay = dayjs(date).subtract(1, 'day').format('YYYY-MM-DD')
