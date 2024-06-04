@@ -1,8 +1,8 @@
 import { Metadata } from 'next'
 
-import { formatToday } from '@/utils/format'
+import { formatData, getCurrentTimeDate } from '@/utils/format'
 
-import WaterListPage from '@/components/modules/WaterListPage'
+import WaterListPage from '@/components/containers/WaterListPage'
 
 import { WaterResponse, fetchWaters } from '@/app/(action)/water'
 
@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 }
 
 const ListPage = async ({ searchParams }: { searchParams?: { date: string } }) => {
-  const date = searchParams?.date ?? formatToday()
+  const date = searchParams?.date ?? formatData(getCurrentTimeDate())
   const res = await fetchWaters({ date })
   const waters = (await res.json()) as WaterResponse[]
   return <WaterListPage date={date} waters={waters} />

@@ -7,10 +7,10 @@ dayjs.extend(utc)
 dayjs.extend(timezone)
 
 /**
- * 今日の日付を取得し、YYYY-MM-DDに変換する
+ * 今日の日時を取得し、文字列に変換する
  */
-export const formatToday = (): string => {
-  return dayjs().tz('Asia/Tokyo').format('YYYY-MM-DD')
+export const getCurrentTimeDate = (): string => {
+  return dayjs().tz('Asia/Tokyo').toString()
 }
 
 /**
@@ -44,6 +44,25 @@ export const formatTime = (data: string | null): string => {
 }
 
 /**
+ * 指定した日時からHHに変換する
+ */
+export const formatHour = (data: string | null): string => {
+  if (dayjs(data).isValid()) {
+    return dayjs(data).tz('Asia/Tokyo').format('HH')
+  }
+  return ''
+}
+
+/**
+ * 指定した日時からmmに変換する
+ */
+export const formatMinutes = (data: string | null): string => {
+  if (dayjs(data).isValid()) {
+    return dayjs(data).tz('Asia/Tokyo').format('mm')
+  }
+  return ''
+}
+/**
  * 指定した日時から1日後の日時を取得し、文字列に変換する
  */
 export const addOneDay = (date: string): string => {
@@ -61,4 +80,12 @@ export const subtractOneDay = (date: string): string => {
     return dayjs(date).tz('Asia/Tokyo').subtract(1, 'day').toString()
   }
   return ''
+}
+
+/**
+ * 指定したHH:mmからYYYY-MM-DD HH:mmに変換する。YYYY-MM-DDは本日の日付
+ */
+export const hoge = (time: string): string => {
+  const today = formatData(getCurrentTimeDate())
+  return `${today}-${time}`
 }

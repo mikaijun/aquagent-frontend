@@ -4,7 +4,6 @@ import { cookies } from 'next/headers'
 import { NextResponse } from 'next/server'
 
 import { formatCookiesForHeader } from '@/utils/cookies'
-import { formatDataWithTime } from '@/utils/format'
 
 import { endPoint } from '@/constants/urls'
 
@@ -15,7 +14,13 @@ export type WaterResponse = {
   DrankAt: string
 }
 
-export async function saveWater({ volume }: { volume: number }): Promise<WaterResponse> {
+export async function saveWater({
+  volume,
+  drank_at,
+}: {
+  volume: number
+  drank_at: string
+}): Promise<WaterResponse> {
   const cookiesStore = cookies()
   const response = await fetch(endPoint.loggedIn.waters, {
     method: 'POST',
@@ -26,8 +31,7 @@ export async function saveWater({ volume }: { volume: number }): Promise<WaterRe
     credentials: 'include',
     body: JSON.stringify({
       volume,
-      // TODO: 指定できるようにする
-      drank_at: formatDataWithTime(new Date().toISOString()),
+      drank_at,
     }),
   })
   if (response.status === 200) {

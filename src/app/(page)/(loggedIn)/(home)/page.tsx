@@ -3,9 +3,9 @@ import React from 'react'
 import { GoPlus } from 'react-icons/go'
 import { IoIosArrowForward } from 'react-icons/io'
 
-import { formatToday } from '@/utils/format'
+import { formatData, getCurrentTimeDate } from '@/utils/format'
 
-import { WaterFormSheet } from '@/components/modules/WaterFormSheet'
+import { WaterFormSheet } from '@/components/containers/WaterFormSheet'
 import { Card } from '@/components/ui/card'
 import { SheetTrigger } from '@/components/ui/sheet'
 
@@ -17,7 +17,7 @@ export const metadata: Metadata = {
 }
 
 const HomePage = async () => {
-  const today = formatToday()
+  const today = formatData(getCurrentTimeDate())
   const res = await fetchWaters({ date: today })
   const waters = (await res.json()) as WaterResponse[]
   const total = waters.reduce((acc, cur) => acc + cur.Volume, 0)

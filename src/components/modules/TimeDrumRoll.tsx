@@ -1,43 +1,32 @@
 'use client'
 
-import { useCallback, useState } from 'react'
 import Picker, { PickerValue } from 'react-mobile-picker'
 
 import { Button } from '@/components/ui/button'
-import {
-  Dialog,
-  DialogClose,
-  DialogContent,
-  DialogTitle,
-  DialogTrigger,
-} from '@/components/ui/dialog'
+import { Dialog, DialogClose, DialogContent, DialogTitle } from '@/components/ui/dialog'
 
 const hourArray = Array.from({ length: 24 }, (_, i) => String(i).padStart(2, '0'))
 
 const minuteArray = Array.from({ length: 60 }, (_, i) => String(i).padStart(2, '0'))
 
-const TimeDrumRoll = () => {
-  const [pickerValue, setPickerValue] = useState<PickerValue>({
-    hour: '00',
-    minute: '00',
-  })
+type TimeDrumRollProps = {
+  pickerValue: PickerValue
+  children: React.ReactNode
+  onPickerChange: (newValue: PickerValue, key: string) => void
+}
 
-  const handlePickerChange = useCallback(
-    (newValue: PickerValue, key: string) => {
-      setPickerValue({ ...pickerValue, [key]: newValue[key] })
-    },
-    [pickerValue],
-  )
-
+const TimeDrumRoll: React.FC<TimeDrumRollProps> = ({
+  pickerValue,
+  children,
+  onPickerChange,
+}) => {
   return (
     <Dialog>
-      <DialogTrigger>
-        Click to set: {pickerValue.hour}:{pickerValue.minute}
-      </DialogTrigger>
+      {children}
       <DialogContent>
         <DialogTitle>水分摂取時間</DialogTitle>
         <div className='mt-2'>
-          <Picker value={pickerValue} wheelMode='natural' onChange={handlePickerChange}>
+          <Picker value={pickerValue} wheelMode='natural' onChange={onPickerChange}>
             <Picker.Column name='hour'>
               {hourArray.map((hour) => (
                 <Picker.Item key={hour} value={hour}>
