@@ -3,7 +3,7 @@ import React from 'react'
 import { GoPlus } from 'react-icons/go'
 import { IoIosArrowForward } from 'react-icons/io'
 
-import { formatData, getCurrentTimeDate } from '@/utils/format'
+import { currentTimeDate, formatData } from '@/utils/format'
 
 import { WaterFormSheet } from '@/components/containers/WaterFormSheet'
 import { Card } from '@/components/ui/card'
@@ -17,13 +17,13 @@ export const metadata: Metadata = {
 }
 
 const HomePage = async () => {
-  const today = formatData(getCurrentTimeDate())
-  const res = await fetchWaters({ date: today })
+  const date = formatData(currentTimeDate)
+  const res = await fetchWaters({ date })
   const waters = (await res.json()) as WaterResponse[]
   const total = waters.reduce((acc, cur) => acc + cur.Volume, 0)
   return (
     <div className='py-8 px-4'>
-      <WaterFormSheet>
+      <WaterFormSheet date={date}>
         <SheetTrigger className='block mx-auto mb-12'>
           <Card className='shadow-2xl p-4 w-full max-w-lg mx-auto  bg-primary text-white rounded-lg flex items-center'>
             <p className='text-xl font-bold'>飲んだ水を記録する</p>

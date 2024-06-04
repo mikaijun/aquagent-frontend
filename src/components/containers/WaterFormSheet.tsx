@@ -5,7 +5,7 @@ import { useCallback, useState } from 'react'
 import { IoTime } from 'react-icons/io5'
 import { PickerValue } from 'react-mobile-picker'
 
-import { formatData, formatHour, formatMinutes, getCurrentTimeDate } from '@/utils/format'
+import { currentHour, currentMinutes } from '@/utils/format'
 
 import TimeDrumRoll from '@/components/modules/TimeDrumRoll'
 import { Button } from '@/components/ui/button'
@@ -32,28 +32,27 @@ const options = [
 ]
 
 type WaterFormSheetProps = {
+  date: string
   children: React.ReactNode
 }
 
-export const WaterFormSheet: React.FC<WaterFormSheetProps> = ({ children }) => {
+export const WaterFormSheet: React.FC<WaterFormSheetProps> = ({ date, children }) => {
   const [volume, setVolume] = useState<string>('250')
   const router = useRouter()
   const { toast } = useToast()
-  const current = getCurrentTimeDate()
   const [pickerValue, setPickerValue] = useState<PickerValue>({
-    hour: formatHour(current),
-    minute: formatMinutes(current),
+    hour: currentHour,
+    minute: currentMinutes,
   })
 
   const handleSave = useCallback(async () => {
-    const today = formatData(getCurrentTimeDate())
-    const drank_at = `${today} ${pickerValue.hour}:${pickerValue.minute}`
+    const drank_at = `${date} ${pickerValue.hour}:${pickerValue.minute}`
     const res = await saveWater({ volume: Number(volume), drank_at })
     if (res.ID > 0) {
       toast({ title: '保存しました' })
       router.refresh()
     }
-  }, [volume, router, pickerValue, toast])
+  }, [date, volume, router, pickerValue, toast])
 
   const handleChange = (value: string) => {
     setVolume(value)

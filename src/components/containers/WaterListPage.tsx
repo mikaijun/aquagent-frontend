@@ -49,7 +49,7 @@ const WaterListPage: React.FC<WaterListPageProps> = ({ waters, date }) => {
         <p className='text-4xl font-extrabold text-blue-700 flex-1 text-center'>
           {total}ml
         </p>
-        <WaterFormSheet>
+        <WaterFormSheet date={date}>
           <SheetTrigger>
             <div className='bg-primary text-white rounded-lg p-1'>
               <GoPlus size='30px' />
