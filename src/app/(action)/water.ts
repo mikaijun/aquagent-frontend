@@ -14,6 +14,24 @@ export type WaterResponse = {
   DrankAt: string
 }
 
+type QueryType = {
+  date?: string
+  pastWeek?: boolean
+  month?: string
+}
+
+const generateEndPoint = ({ date, pastWeek, month }: QueryType) => {
+  if (date) {
+    return endPoint.loggedIn.watersFilterDate(date)
+  } else if (pastWeek) {
+    return endPoint.loggedIn.watersFilterPastWeek
+  } else if (month) {
+    return endPoint.loggedIn.watersFilterMonth(month)
+  } else {
+    return endPoint.loggedIn.waters
+  }
+}
+
 export async function saveWater({
   volume,
   drank_at,
@@ -63,17 +81,11 @@ export async function deleteWater({ id }: { id: number }) {
 
 export async function fetchWaters({
   date,
+  pastWeek,
   month,
-}: {
-  date?: string
-  month?: string
-}): Promise<NextResponse<WaterResponse[]>> {
+}: QueryType): Promise<NextResponse<WaterResponse[]>> {
   const cookiesStore = cookies()
-  const url = date
-    ? endPoint.loggedIn.watersFilterDate(date)
-    : month
-      ? endPoint.loggedIn.watersFilterMonth(month)
-      : endPoint.loggedIn.waters
+  const url = generateEndPoint({ date, pastWeek, month })
   try {
     const response = await fetch(url, {
       headers: {

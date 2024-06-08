@@ -22,6 +22,7 @@ export const endPoint = {
     users: `${baseurl}/v1/users`,
     waters: `${baseurl}/v1/waters`,
     watersFilterDate: (date: string) => `${baseurl}/v1/waters?date=${date}`,
+    watersFilterPastWeek: `${baseurl}/v1/waters?pastWeek=true`,
     watersFilterMonth: (month: string) => `${baseurl}/v1/waters?month=${month}`,
     water: (id: number) => `${baseurl}/v1/waters/${id}`,
     logout: `${baseurl}/logout`,

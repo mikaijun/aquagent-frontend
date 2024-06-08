@@ -18,9 +18,10 @@ export const metadata: Metadata = {
 
 const HomePage = async () => {
   const date = formatData(currentTimeDate)
-  const res = await fetchWaters({ date })
+  const res = await fetchWaters({ pastWeek: true })
   const waters = (await res.json()) as WaterResponse[]
-  const total = waters.reduce((acc, cur) => acc + cur.Volume, 0)
+  const todayWaters = waters.filter((water) => formatData(water.DrankAt) === date)
+  const total = todayWaters.reduce((acc, cur) => acc + cur.Volume, 0)
   return (
     <div className='py-8 px-4'>
       <WaterFormSheet date={date}>
