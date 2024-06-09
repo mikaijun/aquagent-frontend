@@ -3,10 +3,15 @@ import React from 'react'
 import { GoPlus } from 'react-icons/go'
 import { IoIosArrowForward } from 'react-icons/io'
 
-import { currentTimeDate, formatData } from '@/utils/format'
+import {
+  currentTimeDate,
+  formatData,
+  getThisMondayDay,
+  getThisSundayDay,
+} from '@/utils/format'
 
 import { WaterFormSheet } from '@/components/containers/WaterFormSheet'
-import WeeklyWaters from '@/components/modules/WeeklyWaters'
+import WeeklyWaters from '@/components/containers/WeeklyWaters'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { SheetTrigger } from '@/components/ui/sheet'
 
@@ -18,14 +23,18 @@ export const metadata: Metadata = {
 }
 
 const HomePage = async () => {
-  const date = formatData(currentTimeDate)
-  const res = await fetchWaters({ pastWeek: true })
+  const currentDate = formatData(currentTimeDate)
+
+  const res = await fetchWaters({
+    start: getThisMondayDay(currentDate),
+    end: getThisSundayDay(currentDate),
+  })
   const waters = (await res.json()) as WaterResponse[]
-  const todayWaters = waters.filter((water) => formatData(water.DrankAt) === date)
+  const todayWaters = waters.filter((water) => formatData(water.DrankAt) === currentDate)
   const todayVolume = todayWaters.reduce((acc, cur) => acc + cur.Volume, 0)
   return (
-    <div className='py-8 px-4'>
-      <WaterFormSheet date={date}>
+    <div className='pt-8 pb-16 px-4'>
+      <WaterFormSheet date={currentDate}>
         <SheetTrigger className='block mx-auto mb-12'>
           <Card className='shadow-2xl p-4 w-full max-w-lg mx-auto  bg-primary text-white rounded-lg flex items-center'>
             <p className='text-xl font-bold'>飲んだ水を記録する</p>

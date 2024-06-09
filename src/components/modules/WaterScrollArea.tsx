@@ -13,13 +13,13 @@ import { WaterResponse, deleteWater } from '@/app/(action)/water'
 
 type WaterScrollAreaProps = {
   waters: WaterResponse[]
-  scrollAreaHeight?: string
+  scrollAreaHeight: string
   className?: string
 }
 
 export const WaterScrollArea: React.FC<WaterScrollAreaProps> = ({
   waters,
-  scrollAreaHeight = 'h-52',
+  scrollAreaHeight,
   className,
 }) => {
   return (

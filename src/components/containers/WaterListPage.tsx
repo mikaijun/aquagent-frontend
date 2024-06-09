@@ -59,7 +59,7 @@ const WaterListPage: React.FC<WaterListPageProps> = ({ waters, date }) => {
       </div>
       <WaterScrollArea
         className='max-w-lg mx-auto bg-white shadow-lg rounded-lg p-6 shadow-2xl'
-        scrollAreaHeight='h-[480px]'
+        scrollAreaHeight='h-80'
         waters={waters}
       />
     </div>

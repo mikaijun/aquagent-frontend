@@ -1,6 +1,5 @@
 import { headers } from 'next/headers'
-import { FaHome } from 'react-icons/fa'
-import { IoIosWater } from 'react-icons/io'
+import { FaHome, FaList } from 'react-icons/fa'
 
 import { SettingSheet } from '@/components/modules/SettingSheet'
 import { Card, CardContent } from '@/components/ui/card'
@@ -71,8 +70,8 @@ export default function RootLayout({
                   )}
                   href={PagePath.loggedIn.list}
                 >
-                  <IoIosWater className='mb-1 text-2xl' />
-                  <p className='text-xs'>水分管理</p>
+                  <FaList className='mb-1 text-2xl' />
+                  <p className='text-xs'>一覧</p>
                 </a>
                 <SettingSheet />
               </div>
