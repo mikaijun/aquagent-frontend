@@ -6,7 +6,8 @@ import { IoIosArrowForward } from 'react-icons/io'
 import { currentTimeDate, formatData } from '@/utils/format'
 
 import { WaterFormSheet } from '@/components/containers/WaterFormSheet'
-import { Card } from '@/components/ui/card'
+import WeeklyWaters from '@/components/modules/WeeklyWaters'
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { SheetTrigger } from '@/components/ui/sheet'
 
 import { WaterResponse, fetchWaters } from '@/app/(action)/water'
@@ -21,7 +22,7 @@ const HomePage = async () => {
   const res = await fetchWaters({ pastWeek: true })
   const waters = (await res.json()) as WaterResponse[]
   const todayWaters = waters.filter((water) => formatData(water.DrankAt) === date)
-  const total = todayWaters.reduce((acc, cur) => acc + cur.Volume, 0)
+  const todayVolume = todayWaters.reduce((acc, cur) => acc + cur.Volume, 0)
   return (
     <div className='py-8 px-4'>
       <WaterFormSheet date={date}>
@@ -32,15 +33,18 @@ const HomePage = async () => {
           </Card>
         </SheetTrigger>
       </WaterFormSheet>
-      <p className='text-4xl font-extrabold text-center text-gray-800 mb-8'>
-        本日の水分量
-      </p>
       <a className='text-primary mt-4' href={PagePath.loggedIn.list}>
-        <Card className='text-blue-700 mb-4 flex items-center p-4 justify-between'>
-          <p className='font-extrabold text-4xl'>{total}ml</p>
-          <IoIosArrowForward size='28px' />
+        <Card className='mb-4'>
+          <CardHeader>
+            <CardTitle className='text-xl font-extrabold'> 本日の水分量</CardTitle>
+          </CardHeader>
+          <CardContent className='text-blue-700  flex items-center justify-between'>
+            <p className='font-extrabold text-4xl'>{todayVolume}ml</p>
+            <IoIosArrowForward size='28px' />
+          </CardContent>
         </Card>
       </a>
+      <WeeklyWaters waters={waters} />
     </div>
   )
 }

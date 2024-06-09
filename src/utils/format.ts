@@ -6,6 +6,16 @@ import utc from 'dayjs/plugin/utc'
 dayjs.extend(utc)
 dayjs.extend(timezone)
 
+export const DAY_OF_WEEK = {
+  SUNDAY: '0',
+  MONDAY: '1',
+  TUESDAY: '2',
+  WEDNESDAY: '3',
+  THURSDAY: '4',
+  FRIDAY: '5',
+  SATURDAY: '6',
+}
+
 /**
  * 今日の日時を取得し、文字列に変換する
  */
@@ -66,6 +76,16 @@ export const addOneDay = (date: string): string => {
 export const subtractOneDay = (date: string): string => {
   if (dayjs(date).isValid()) {
     return dayjs(date).tz('Asia/Tokyo').subtract(1, 'day').toString()
+  }
+  return ''
+}
+
+/**
+ * 指定した日時から曜日を'0' ~ '6'で取得する
+ */
+export const formatDayOfWeek = (date: string): string => {
+  if (dayjs(date).isValid()) {
+    return dayjs(date).tz('Asia/Tokyo').format('d')
   }
   return ''
 }
