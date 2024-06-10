@@ -2,6 +2,8 @@
 
 import { IoIosArrowForward } from 'react-icons/io'
 
+import { currentTimeDate, formatData } from '@/utils/format'
+
 import WaterBarChart from '@/components/modules/WaterBarChart'
 import { Card, CardContent, CardHeader } from '@/components/ui/card'
 
@@ -12,6 +14,9 @@ type WeeklyWatersProps = {
 }
 
 const WeeklyWaters: React.FC<WeeklyWatersProps> = ({ waters }) => {
+  const currentDate = formatData(currentTimeDate)
+  console.log('currentDate', currentDate)
+  waters.map((water) => console.log('drankAt', formatData(water.DrankAt)))
   return (
     <div className='grid gap-4 sm:grid-cols-2 xl:grid-cols-2'>
       <Card>

@@ -32,8 +32,6 @@ const HomePage = async () => {
   const waters = (await res.json()) as WaterResponse[]
   const todayWaters = waters.filter((water) => formatData(water.DrankAt) === currentDate)
   const todayVolume = todayWaters.reduce((acc, cur) => acc + cur.Volume, 0)
-  console.log('currentDate', currentDate)
-  console.log(waters.map((water) => console.log('drankAt', formatData(water.DrankAt))))
   return (
     <div className='pt-8 pb-16 px-4'>
       <WaterFormSheet date={currentDate}>
