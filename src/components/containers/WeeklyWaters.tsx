@@ -18,7 +18,10 @@ const WeeklyWaters: React.FC<WeeklyWatersProps> = ({ waters }) => {
   console.log('currentDate', currentDate)
   const todayWaters = waters.filter((water) => formatData(water.DrankAt) === currentDate)
   todayWaters.map((water) => console.log('drankAt', formatData(water.DrankAt)))
-  todayWaters.map((water) => console.log('water', water.DrankAt))
+  todayWaters.map((water) => console.log('water', water))
+  todayWaters.map((water) =>
+    console.log('check', formatData(water.DrankAt) === currentDate),
+  )
   return (
     <div className='grid gap-4 sm:grid-cols-2 xl:grid-cols-2'>
       <Card>
