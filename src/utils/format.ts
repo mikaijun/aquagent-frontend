@@ -16,6 +16,28 @@ export const DAY_OF_WEEK = {
   SATURDAY: '6',
 }
 
+const japaneseWeek = (date: string) => {
+  const week = formatDayOfWeek(date)
+  switch (week) {
+    case DAY_OF_WEEK.SUNDAY:
+      return '(日)'
+    case DAY_OF_WEEK.MONDAY:
+      return '(月)'
+    case DAY_OF_WEEK.TUESDAY:
+      return '(火)'
+    case DAY_OF_WEEK.WEDNESDAY:
+      return '(水)'
+    case DAY_OF_WEEK.THURSDAY:
+      return '(木)'
+    case DAY_OF_WEEK.FRIDAY:
+      return '(金)'
+    case DAY_OF_WEEK.SATURDAY:
+      return '(土)'
+    default:
+      return ''
+  }
+}
+
 /**
  * 今日の日時を取得し、文字列に変換する
  */
@@ -26,7 +48,18 @@ export const currentTimeDate = dayjs().tz('Asia/Tokyo').toString()
  */
 export const formatData = (data: string | null): string => {
   if (dayjs(data).isValid()) {
-    return dayjs(data).tz('Asia/Tokyo').format('YYYY-MM-DD')
+    return dayjs(data).tz('Asia/Tokyo').format('YYYY/MM/DD')
+  }
+  return ''
+}
+
+/**
+ * 指定した日付をYYYY-MM-DD (曜日)に変換する
+ */
+export const formatDataWithDayOfWeek = (data: string | null): string => {
+  if (dayjs(data).isValid()) {
+    const value = dayjs(data).tz('Asia/Tokyo').format('YYYY/MM/DD')
+    return value + japaneseWeek(value)
   }
   return ''
 }
@@ -36,7 +69,7 @@ export const formatData = (data: string | null): string => {
  */
 export const formatDataWithTime = (data: string | null): string => {
   if (dayjs(data).isValid()) {
-    return dayjs(data).tz('Asia/Tokyo').format('YYYY-MM-DD HH:mm')
+    return dayjs(data).tz('Asia/Tokyo').format('YYYY/MM/DD HH:mm')
   }
   return ''
 }

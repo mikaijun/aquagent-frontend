@@ -4,7 +4,7 @@ import { ArrowLeftIcon, ArrowRightIcon } from 'lucide-react'
 import { useRouter } from 'next/navigation'
 import { GoPlus } from 'react-icons/go'
 
-import { addDay, formatData, subtractDay } from '@/utils/format'
+import { addDay, formatData, formatDataWithDayOfWeek, subtractDay } from '@/utils/format'
 
 import { WaterFormSheet } from '@/components/containers/WaterFormSheet'
 import { WaterScrollArea } from '@/components/modules/WaterScrollArea'
@@ -38,8 +38,8 @@ const WaterListPage: React.FC<WaterListPageProps> = ({ waters, date }) => {
         <button className='p-2' onClick={handlePreviousDay}>
           <ArrowLeftIcon className='h-6 w-6 text-gray-800' />
         </button>
-        <p className='text-2xl font-extrabold text-center text-gray-800 mx-4'>
-          {formatData(date)}
+        <p className='text-xl font-extrabold text-center text-gray-800 mx-4'>
+          {formatDataWithDayOfWeek(date)}
         </p>
         <button className='p-2' onClick={handleNextDay}>
           <ArrowRightIcon className='h-6 w-6 text-gray-800' />

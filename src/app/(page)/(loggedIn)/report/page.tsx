@@ -6,6 +6,7 @@ import {
   addDay,
   currentTimeDate,
   formatData,
+  formatDataWithDayOfWeek,
   getThisMondayDay,
   getThisSundayDay,
   subtractDay,
@@ -31,25 +32,28 @@ const ReportPage = async ({ searchParams }: { searchParams?: { date: string } })
   const waters = (await res.json()) as WaterResponse[]
   return (
     <div className='pt-8 pb-16 px-4'>
-      <div className='flex justify-center items-center mb-4'>
-        <Link
-          href={PagePath.loggedIn.reportWithDate(formatData(subtractDay(date, 'week')))}
-          rel='prev'
-        >
-          <ArrowLeftIcon className='h-6 w-6 text-gray-800' />
-        </Link>
-        <p className='font-extrabold text-center text-gray-800 text-sm'>
-          {formatData(getThisMondayDay(date))}~{formatData(getThisSundayDay(date))}
-        </p>
-        <Link
-          href={PagePath.loggedIn.reportWithDate(formatData(addDay(date, 'week')))}
-          rel='next'
-        >
-          <ArrowRightIcon className='h-6 w-6 text-gray-800' />
-        </Link>
+      <div className='mb-4'>
+        <div className='font-extrabold text-center text-gray-800 flex gap-1 justify-around'>
+          <p>{formatDataWithDayOfWeek(getThisMondayDay(date))}</p>
+          <p>~</p>
+          <p>{formatDataWithDayOfWeek(getThisSundayDay(date))}</p>
+        </div>
       </div>
       <Card className='grid gap-4 sm:grid-cols-2 xl:grid-cols-2'>
-        <CardHeader className='flex flex-row items-center justify-between p-2'></CardHeader>
+        <CardHeader className='flex flex-row items-center justify-between px-4 flex py-2'>
+          <Link
+            href={PagePath.loggedIn.reportWithDate(formatData(subtractDay(date, 'week')))}
+            rel='prev'
+          >
+            <ArrowLeftIcon className='h-6 w-6 text-gray-800' />
+          </Link>
+          <Link
+            href={PagePath.loggedIn.reportWithDate(formatData(addDay(date, 'week')))}
+            rel='next'
+          >
+            <ArrowRightIcon className='h-6 w-6 text-gray-800' />
+          </Link>
+        </CardHeader>
         <CardContent className='mt-4 h-40 p-0'>
           <WaterBarChart waters={waters} />
         </CardContent>
