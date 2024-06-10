@@ -24,13 +24,13 @@ export const metadata: Metadata = {
 
 const HomePage = async () => {
   const currentDate = formatData(currentTimeDate)
-
   const res = await fetchWaters({
     start: getThisMondayDay(currentDate),
     end: getThisSundayDay(currentDate),
   })
   const waters = (await res.json()) as WaterResponse[]
-  const todayWaters = waters.filter((water) => formatData(water.DrankAt) === currentDate)
+  const todayWatersResponse = await fetchWaters({ date: formatData(currentTimeDate) })
+  const todayWaters = (await todayWatersResponse.json()) as WaterResponse[]
   const todayVolume = todayWaters.reduce((acc, cur) => acc + cur.Volume, 0)
   return (
     <div className='pt-8 pb-16 px-4'>

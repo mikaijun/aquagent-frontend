@@ -26,7 +26,7 @@ export const currentTimeDate = dayjs().tz('Asia/Tokyo').toString()
  */
 export const formatData = (data: string | null): string => {
   if (dayjs(data).isValid()) {
-    return dayjs(data).format('YYYY-MM-DD')
+    return dayjs(data).tz('Asia/Tokyo').format('YYYY-MM-DD')
   }
   return ''
 }
