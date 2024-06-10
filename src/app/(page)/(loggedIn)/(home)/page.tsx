@@ -25,8 +25,8 @@ export const metadata: Metadata = {
 const HomePage = async () => {
   const currentDate = formatData(currentTimeDate)
   const res = await fetchWaters({
-    start: getThisMondayDay(currentDate),
-    end: getThisSundayDay(currentDate),
+    start: formatData(getThisMondayDay(currentDate)),
+    end: formatData(getThisSundayDay(currentDate)),
   })
   const waters = (await res.json()) as WaterResponse[]
   const todayWatersResponse = await fetchWaters({ date: formatData(currentTimeDate) })
