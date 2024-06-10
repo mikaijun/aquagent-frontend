@@ -95,7 +95,7 @@ export const formatDayOfWeek = (date: string): string => {
  */
 export const getThisMondayDay = (date: string): string => {
   if (!dayjs(date).isValid()) return ''
-  const weekStart = dayjs(date).startOf('week').tz('Asia/Tokyo')
+  const weekStart = dayjs(date).tz('Asia/Tokyo').startOf('week')
   // NOTE: dateが日曜日の場合、先週(6日前)の月曜日を返す
   if (formatDayOfWeek(date) === DAY_OF_WEEK.SUNDAY) {
     return addOneDay(weekStart.subtract(1, 'week').toString())
@@ -109,7 +109,7 @@ export const getThisMondayDay = (date: string): string => {
 
 export const getThisSundayDay = (date: string): string => {
   if (!dayjs(date).isValid()) return ''
-  const weekEnd = dayjs(date).endOf('week').tz('Asia/Tokyo')
+  const weekEnd = dayjs(date).tz('Asia/Tokyo').endOf('week')
   // NOTE: dateが日曜日の場合、本日の日付を返す
   if (formatDayOfWeek(date) === DAY_OF_WEEK.SUNDAY) {
     return date.toString()
