@@ -1,5 +1,6 @@
 import { headers } from 'next/headers'
 import { FaHome, FaList } from 'react-icons/fa'
+import { SiSimpleanalytics } from 'react-icons/si'
 
 import { SettingSheet } from '@/components/modules/SettingSheet'
 import { Card, CardContent } from '@/components/ui/card'
@@ -72,6 +73,16 @@ export default function RootLayout({
                 >
                   <FaList className='mb-1 text-2xl' />
                   <p className='text-xs'>一覧</p>
+                </a>
+                <a
+                  className={cn(
+                    footerLinkStyle,
+                    textColor(pathName, PagePath.loggedIn.report),
+                  )}
+                  href={PagePath.loggedIn.report}
+                >
+                  <SiSimpleanalytics className='mb-1 text-2xl' />
+                  <p className='text-xs'>レポート</p>
                 </a>
                 <SettingSheet />
               </div>

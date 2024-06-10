@@ -11,7 +11,7 @@ import {
 } from '@/utils/format'
 
 import { WaterFormSheet } from '@/components/containers/WaterFormSheet'
-import WeeklyWaters from '@/components/containers/WeeklyWaters'
+import WaterBarChart from '@/components/modules/WaterBarChart'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { SheetTrigger } from '@/components/ui/sheet'
 
@@ -24,13 +24,14 @@ export const metadata: Metadata = {
 
 const HomePage = async () => {
   const currentDate = formatData(currentTimeDate)
+
   const res = await fetchWaters({
     start: formatData(getThisMondayDay(currentDate)),
     end: formatData(getThisSundayDay(currentDate)),
   })
   const waters = (await res.json()) as WaterResponse[]
-  const todayWatersResponse = await fetchWaters({ date: formatData(currentTimeDate) })
-  const todayWaters = (await todayWatersResponse.json()) as WaterResponse[]
+  const todayWaters = waters.filter((water) => formatData(water.DrankAt) === currentDate)
+
   const todayVolume = todayWaters.reduce((acc, cur) => acc + cur.Volume, 0)
   return (
     <div className='pt-8 pb-16 px-4'>
@@ -53,7 +54,22 @@ const HomePage = async () => {
           </CardContent>
         </Card>
       </a>
-      <WeeklyWaters waters={waters} />
+      <a
+        className='grid gap-4 sm:grid-cols-2 xl:grid-cols-2'
+        href={PagePath.loggedIn.report}
+      >
+        <Card>
+          <CardHeader className='flex flex-row items-center justify-between space-y-0 pb-2'>
+            <div className='flex items-center justify-between w-full'>
+              <p className='text-xl font-extrabold'>週間</p>
+              <IoIosArrowForward className='text-primary' size='28px' />
+            </div>
+          </CardHeader>
+          <CardContent className='mt-4 h-40 p-0'>
+            <WaterBarChart waters={waters} />
+          </CardContent>
+        </Card>
+      </a>
     </div>
   )
 }

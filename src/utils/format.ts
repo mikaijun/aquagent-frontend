@@ -1,4 +1,4 @@
-import dayjs from 'dayjs'
+import dayjs, { ManipulateType } from 'dayjs'
 // NOTE: Vercel デフォルトでTimezoneがUTCにならないようにする
 // https://zenn.dev/kohki_s/articles/a77ac4badf0f3c
 import timezone from 'dayjs/plugin/timezone'
@@ -60,12 +60,13 @@ export const currentHour = dayjs().tz('Asia/Tokyo').format('HH')
  * 指定した日時からmmに変換する
  */
 export const currentMinutes = dayjs().tz('Asia/Tokyo').format('mm')
+
 /**
  * 指定した日時から1日後の日時を取得し、文字列に変換する
  */
-export const addOneDay = (date: string): string => {
+export const addDay = (date: string, type: ManipulateType = 'day'): string => {
   if (dayjs(date).isValid()) {
-    return dayjs(date).tz('Asia/Tokyo').add(1, 'day').toString()
+    return dayjs(date).tz('Asia/Tokyo').add(1, type).toString()
   }
   return ''
 }
@@ -73,9 +74,9 @@ export const addOneDay = (date: string): string => {
 /**
  * 指定した日時から1日前の日時を取得、文字列に変換する
  */
-export const subtractOneDay = (date: string): string => {
+export const subtractDay = (date: string, type: ManipulateType = 'day'): string => {
   if (dayjs(date).isValid()) {
-    return dayjs(date).tz('Asia/Tokyo').subtract(1, 'day').toString()
+    return dayjs(date).tz('Asia/Tokyo').subtract(1, type).toString()
   }
   return ''
 }
@@ -98,9 +99,9 @@ export const getThisMondayDay = (date: string): string => {
   const weekStart = dayjs(date).tz('Asia/Tokyo').startOf('week')
   // NOTE: dateが日曜日の場合、先週(6日前)の月曜日を返す
   if (formatDayOfWeek(date) === DAY_OF_WEEK.SUNDAY) {
-    return addOneDay(weekStart.subtract(1, 'week').toString())
+    return addDay(weekStart.subtract(1, 'week').toString())
   }
-  return addOneDay(weekStart.toString())
+  return addDay(weekStart.toString())
 }
 
 /**

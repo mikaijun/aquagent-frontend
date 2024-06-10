@@ -10,6 +10,8 @@ export const PagePath = {
     home: '/',
     list: '/list',
     listWithDate: (date: string) => `/list?date=${date}`,
+    report: '/report',
+    reportWithDate: (date: string) => `/report?date=${date}`,
   },
 }
 
