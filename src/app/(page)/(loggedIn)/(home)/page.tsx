@@ -47,13 +47,6 @@ const HomePage = async () => {
           <CardHeader>
             <CardTitle className='text-xl font-extrabold'> 本日の水分量</CardTitle>
           </CardHeader>
-          {waters.map((water) => (
-            <CardContent key={water.ID} className='text-blue-700'>
-              <p>加工前: {water.DrankAt}</p>
-              <p>加工後: {formatData(water.DrankAt)}</p>
-              <p>{water.Volume}ml</p>
-            </CardContent>
-          ))}
           <CardContent className='text-blue-700  flex items-center justify-between'>
             <p className='font-extrabold text-4xl'>{todayVolume}ml</p>
             <IoIosArrowForward size='28px' />
