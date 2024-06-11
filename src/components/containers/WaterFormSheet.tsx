@@ -101,7 +101,7 @@ export const WaterFormSheet: React.FC<WaterFormSheetProps> = ({ date, children }
             </p>
           </DialogTrigger>
         </TimeDrumRoll>
-        <div className='flex justify-center justify-center gap-8'>
+        <div className='flex justify-center  gap-8'>
           <SheetClose>
             <Button variant='secondary'>キャンセル</Button>
           </SheetClose>

@@ -65,6 +65,27 @@ export const formatDataWithDayOfWeek = (data: string | null): string => {
 }
 
 /**
+ * 指定した日程からをYYYYに変換する
+ */
+export const formatYear = (data: string | null): string => {
+  if (dayjs(data).isValid()) {
+    return dayjs(data).tz('Asia/Tokyo').format('YYYY')
+  }
+  return ''
+}
+
+/**
+ * 指定した日付をMM-DD (曜日)に変換する
+ */
+export const formatMonthDayWithDayOfWeek = (data: string | null): string => {
+  if (dayjs(data).isValid()) {
+    const value = dayjs(data).tz('Asia/Tokyo').format('MM/DD')
+    return value + japaneseWeek(value)
+  }
+  return ''
+}
+
+/**
  * 指定した日付をYYYY-MM-DD HH:mmに変換する
  */
 export const formatDataWithTime = (data: string | null): string => {

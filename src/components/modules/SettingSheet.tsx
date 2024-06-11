@@ -27,8 +27,8 @@ export const SettingSheet = () => {
       </SheetTrigger>
       <SheetContent side='bottom'>
         <SheetHeader>
-          <SheetTitle>設定</SheetTitle>
-          <SheetDescription>
+          <SheetTitle className='text-center'>設定</SheetTitle>
+          <SheetDescription className='m-auto'>
             <Button onClick={handleLogout}>ログアウト</Button>
           </SheetDescription>
         </SheetHeader>

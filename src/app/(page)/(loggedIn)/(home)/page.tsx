@@ -54,10 +54,7 @@ const HomePage = async () => {
           </CardContent>
         </Card>
       </a>
-      <a
-        className='grid gap-4 sm:grid-cols-2 xl:grid-cols-2'
-        href={PagePath.loggedIn.report}
-      >
+      <a href={PagePath.loggedIn.report}>
         <Card>
           <CardHeader className='flex flex-row items-center justify-between space-y-0 pb-2'>
             <div className='flex items-center justify-between w-full'>

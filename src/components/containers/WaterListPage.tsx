@@ -45,14 +45,14 @@ const WaterListPage: React.FC<WaterListPageProps> = ({ waters, date }) => {
           <ArrowRightIcon className='h-6 w-6 text-gray-800' />
         </button>
       </div>
-      <div className='flex items-center justify-between mb-4'>
+      <div className='flex items-center justify-between mb-4 px-4'>
         <p className='text-4xl font-extrabold text-blue-700 flex-1 text-center'>
           {total}ml
         </p>
         <WaterFormSheet date={date}>
           <SheetTrigger>
             <div className='bg-primary text-white rounded-lg p-1'>
-              <GoPlus size='30px' />
+              <GoPlus size='36px' />
             </div>
           </SheetTrigger>
         </WaterFormSheet>
