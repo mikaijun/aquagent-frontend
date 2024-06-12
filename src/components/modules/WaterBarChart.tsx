@@ -30,13 +30,13 @@ const WaterBarChart: React.FC<WaterBarChartProps> = ({ waters }) => {
   const formatWaters = addDayOfWeekWaters(waters)
 
   const data = [
+    { subscription: calculationVolume(formatWaters, DAY_OF_WEEK.SUNDAY), date: '日' },
     { subscription: calculationVolume(formatWaters, DAY_OF_WEEK.MONDAY), date: '月' },
     { subscription: calculationVolume(formatWaters, DAY_OF_WEEK.TUESDAY), date: '火' },
     { subscription: calculationVolume(formatWaters, DAY_OF_WEEK.WEDNESDAY), date: '水' },
     { subscription: calculationVolume(formatWaters, DAY_OF_WEEK.THURSDAY), date: '木' },
     { subscription: calculationVolume(formatWaters, DAY_OF_WEEK.FRIDAY), date: '金' },
     { subscription: calculationVolume(formatWaters, DAY_OF_WEEK.SATURDAY), date: '土' },
-    { subscription: calculationVolume(formatWaters, DAY_OF_WEEK.SUNDAY), date: '日' },
   ]
   return (
     <ResponsiveContainer height='100%' width='100%'>

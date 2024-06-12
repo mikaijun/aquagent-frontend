@@ -8,7 +8,7 @@ import {
   formatDate,
   formatMonthDayWithDayOfWeek,
   formatYear,
-  getThisMondayDay,
+  getThisSaturDay,
   getThisSundayDay,
   subtractDay,
 } from '@/utils/format'
@@ -33,8 +33,8 @@ const ReportPage = async ({
   const month = searchParams?.month ?? formatDate(currentTimeDate)
 
   const weekResponse = await fetchWaters({
-    start: getThisMondayDay(week),
-    end: getThisSundayDay(week),
+    start: formatDate(getThisSundayDay(week)),
+    end: formatDate(getThisSaturDay(week)),
   })
   const weekWaters = (await weekResponse.json()) as WaterResponse[]
 
@@ -57,9 +57,9 @@ const ReportPage = async ({
             >
               <ArrowLeftIcon className='h-6 w-6 text-gray-800' />
             </Link>
-            <p>{formatMonthDayWithDayOfWeek(getThisMondayDay(week))}</p>
-            <p>~</p>
             <p>{formatMonthDayWithDayOfWeek(getThisSundayDay(week))}</p>
+            <p>~</p>
+            <p>{formatMonthDayWithDayOfWeek(getThisSaturDay(week))}</p>
             <Link
               href={PagePath.loggedIn.reportWithDate(
                 formatDate(addDay(week, 'week')),

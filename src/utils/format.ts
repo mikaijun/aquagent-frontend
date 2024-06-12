@@ -5,13 +5,13 @@ dayjs.extend(utc)
 dayjs.extend(timezone)
 
 export const DAY_OF_WEEK = {
-  SUNDAY: '0',
-  MONDAY: '1',
-  TUESDAY: '2',
-  WEDNESDAY: '3',
-  THURSDAY: '4',
-  FRIDAY: '5',
-  SATURDAY: '6',
+  MONDAY: '0',
+  TUESDAY: '1',
+  WEDNESDAY: '2',
+  THURSDAY: '3',
+  FRIDAY: '4',
+  SATURDAY: '5',
+  SUNDAY: '6',
 }
 
 const japaneseWeek = (date: string) => {
@@ -66,117 +66,89 @@ export const currentMinutes = formatDayjs().format('mm')
  * 指定した日付をYYYY/MM/DDに変換する
  */
 export const formatDate = (date: string | null): string => {
-  if (dayjs(date).isValid()) {
-    return formatDayjs(date).format('YYYY/MM/DD')
-  }
-  return ''
+  if (!dayjs(date).isValid()) return ''
+  return formatDayjs(date).format('YYYY/MM/DD')
 }
 
 /**
  * 指定した日付をYYYY/MM/DD (曜日)に変換する
  */
-export const formatDateWithDayOfWeek = (data: string | null): string => {
-  if (dayjs(data).isValid()) {
-    const value = formatDate(data)
-    return value + japaneseWeek(value)
-  }
-  return ''
+export const formatDateWithDayOfWeek = (date: string | null): string => {
+  if (!dayjs(date).isValid()) return ''
+  const value = formatDate(date)
+  return value + japaneseWeek(value)
 }
 
 /**
  * 指定した日程からをYYYYに変換する
  */
-export const formatYear = (data: string | null): string => {
-  if (dayjs(data).isValid()) {
-    return formatDayjs(data).format('YYYY')
-  }
-  return ''
+export const formatYear = (date: string | null): string => {
+  if (!dayjs(date).isValid()) return ''
+  return formatDayjs(date).format('YYYY')
 }
 
 /**
  * 指定した日付をMM/DD (曜日)に変換する
  */
-export const formatMonthDayWithDayOfWeek = (data: string | null): string => {
-  if (dayjs(data).isValid()) {
-    const value = formatDayjs(data).format('MM/DD')
-    return value + japaneseWeek(value)
-  }
-  return ''
+export const formatMonthDayWithDayOfWeek = (date: string | null): string => {
+  if (!dayjs(date).isValid()) return ''
+  const value = formatDayjs(date).format('MM/DD')
+  return value + japaneseWeek(value)
 }
 
 /**
  * 指定した日付をYYYY/MM/DD HH:mmに変換する
  */
-export const formatDateWithTime = (data: string | null): string => {
-  if (dayjs(data).isValid()) {
-    return formatDayjs(data).format('YYYY/MM/DD HH:mm')
-  }
-  return ''
+export const formatDateWithTime = (date: string | null): string => {
+  if (!dayjs(date).isValid()) return ''
+  return formatDayjs(date).format('YYYY/MM/DD HH:mm')
 }
 
 /**
  * 指定した日時からHH:mmに変換する
  */
-export const formatTime = (data: string | null): string => {
-  if (dayjs(data).isValid()) {
-    return formatDayjs(data).format('HH:mm')
-  }
-  return ''
+export const formatTime = (date: string | null): string => {
+  if (!dayjs(date).isValid()) return ''
+  return formatDayjs(date).format('HH:mm')
 }
 
 /**
  * 指定した日時から1日後の日時を取得し、文字列に変換する
  */
 export const addDay = (date: string, type: ManipulateType = 'day'): string => {
-  if (dayjs(date).isValid()) {
-    return formatDayjs(date).add(1, type).toString()
-  }
-  return ''
+  if (!dayjs(date).isValid()) return ''
+  return formatDayjs(date).add(1, type).toString()
 }
 
 /**
  * 指定した日時から1日前の日時を取得、文字列に変換する
  */
 export const subtractDay = (date: string, type: ManipulateType = 'day'): string => {
-  if (dayjs(date).isValid()) {
-    return formatDayjs(date).subtract(1, type).toString()
-  }
-  return ''
+  if (!dayjs(date).isValid()) return ''
+  return formatDayjs(date).subtract(1, type).toString()
 }
 
 /**
  * 指定した日時から曜日を'0' ~ '6'で取得する
  */
 export const formatDayOfWeek = (date: string): string => {
-  if (dayjs(date).isValid()) {
-    return formatDayjs(date).format('d')
-  }
-  return ''
-}
-
-/**
- * 今週の月曜日の日付を取得し、文字列に変換する
- */
-export const getThisMondayDay = (date: string): string => {
   if (!dayjs(date).isValid()) return ''
-  const weekStart = formatDayjs(date).startOf('week')
-  // NOTE: dateが日曜日の場合、先週(6日前)の月曜日を返す
-  if (formatDayOfWeek(date) === DAY_OF_WEEK.SUNDAY) {
-    return addDay(weekStart.subtract(1, 'week').toString())
-  }
-  return addDay(weekStart.toString())
+  return formatDayjs(date).format('d')
 }
 
 /**
- * 今週の日曜日の日付を取得し、文字列に変換する
+ * 今週の開始日(日曜日)の日付を取得し、文字列に変換する
  */
 
 export const getThisSundayDay = (date: string): string => {
   if (!dayjs(date).isValid()) return ''
-  const weekEnd = formatDayjs(date).endOf('week')
-  // NOTE: dateが日曜日の場合、本日の日付を返す
-  if (formatDayOfWeek(date) === DAY_OF_WEEK.SUNDAY) {
-    return date.toString()
-  }
-  return weekEnd.add(1, 'day').toString()
+  return formatDayjs(date).startOf('week').toString()
+}
+
+/**
+ * 今週の終了日(土曜日)の日付を取得し、文字列に変換する
+ */
+export const getThisSaturDay = (date: string): string => {
+  if (!dayjs(date).isValid()) return ''
+  return formatDayjs(date).endOf('week').toString()
 }

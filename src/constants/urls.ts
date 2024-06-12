@@ -27,7 +27,6 @@ export const endPoint = {
     watersFilterDate: (date: string) => `${baseurl}/v1/waters?date=${date}`,
     watersRange: (start: string, end: string) =>
       `${baseurl}/v1/waters?start=${start}&end=${end}`,
-    watersFilterMonth: (month: string) => `${baseurl}/v1/waters?month=${month}`,
     water: (id: number) => `${baseurl}/v1/waters/${id}`,
     logout: `${baseurl}/logout`,
   },

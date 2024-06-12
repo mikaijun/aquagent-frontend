@@ -6,7 +6,7 @@ import { IoIosArrowForward } from 'react-icons/io'
 import {
   currentTimeDate,
   formatDate,
-  getThisMondayDay,
+  getThisSaturDay,
   getThisSundayDay,
 } from '@/utils/format'
 
@@ -26,7 +26,7 @@ const HomePage = async () => {
   const currentDate = formatDate(currentTimeDate)
 
   const res = await fetchWaters({
-    start: formatDate(getThisMondayDay(currentDate)),
+    start: formatDate(getThisSaturDay(currentDate)),
     end: formatDate(getThisSundayDay(currentDate)),
   })
   const waters = (await res.json()) as WaterResponse[]

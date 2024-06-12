@@ -18,16 +18,13 @@ type QueryType = {
   date?: string
   start?: string
   end?: string
-  month?: string
 }
 
-const generateEndPoint = ({ date, start, end, month }: QueryType) => {
+const generateEndPoint = ({ date, start, end }: QueryType) => {
   if (date) {
     return endPoint.loggedIn.watersFilterDate(date)
   } else if (start && end) {
     return endPoint.loggedIn.watersRange(start, end)
-  } else if (month) {
-    return endPoint.loggedIn.watersFilterMonth(month)
   } else {
     return endPoint.loggedIn.waters
   }
@@ -84,10 +81,9 @@ export async function fetchWaters({
   date,
   start,
   end,
-  month,
 }: QueryType): Promise<NextResponse<WaterResponse[]>> {
   const cookiesStore = cookies()
-  const url = generateEndPoint({ date, start, end, month })
+  const url = generateEndPoint({ date, start, end })
   try {
     const response = await fetch(url, {
       headers: {
