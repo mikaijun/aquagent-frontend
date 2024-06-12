@@ -1,6 +1,4 @@
 import dayjs, { ManipulateType } from 'dayjs'
-// NOTE: Vercel デフォルトでTimezoneがUTCにならないようにする
-// https://zenn.dev/kohki_s/articles/a77ac4badf0f3c
 import timezone from 'dayjs/plugin/timezone'
 import utc from 'dayjs/plugin/utc'
 dayjs.extend(utc)
@@ -19,8 +17,6 @@ export const DAY_OF_WEEK = {
 const japaneseWeek = (date: string) => {
   const week = formatDayOfWeek(date)
   switch (week) {
-    case DAY_OF_WEEK.SUNDAY:
-      return '(日)'
     case DAY_OF_WEEK.MONDAY:
       return '(月)'
     case DAY_OF_WEEK.TUESDAY:
@@ -33,32 +29,55 @@ const japaneseWeek = (date: string) => {
       return '(金)'
     case DAY_OF_WEEK.SATURDAY:
       return '(土)'
+    case DAY_OF_WEEK.SUNDAY:
+      return '(日)'
     default:
       return ''
   }
 }
 
 /**
- * 今日の日時を取得し、文字列に変換する
+ * VercelのデフォルトでTimezoneがUTCにならないようにする
+ * https://zenn.dev/kohki_s/articles/a77ac4badf0f3c
  */
-export const currentTimeDate = dayjs().tz('Asia/Tokyo').toString()
+const formatDayjs = (date?: string | null) => {
+  if (date) {
+    return dayjs(date).tz('Asia/Tokyo')
+  }
+  return dayjs().tz('Asia/Tokyo')
+}
 
 /**
- * 指定した日付をYYYY-MM-DDに変換する
+ * 現在日時を文字列として取得する
  */
-export const formatData = (data: string | null): string => {
-  if (dayjs(data).isValid()) {
-    return dayjs(data).tz('Asia/Tokyo').format('YYYY/MM/DD')
+export const currentTimeDate = formatDayjs().toString()
+
+/**
+ * 現在日時からHHを取得する
+ */
+export const currentHour = formatDayjs().format('HH')
+
+/**
+ * 現在日時からmmを取得する
+ */
+export const currentMinutes = formatDayjs().format('mm')
+
+/**
+ * 指定した日付をYYYY/MM/DDに変換する
+ */
+export const formatDate = (date: string | null): string => {
+  if (dayjs(date).isValid()) {
+    return formatDayjs(date).format('YYYY/MM/DD')
   }
   return ''
 }
 
 /**
- * 指定した日付をYYYY-MM-DD (曜日)に変換する
+ * 指定した日付をYYYY/MM/DD (曜日)に変換する
  */
-export const formatDataWithDayOfWeek = (data: string | null): string => {
+export const formatDateWithDayOfWeek = (data: string | null): string => {
   if (dayjs(data).isValid()) {
-    const value = dayjs(data).tz('Asia/Tokyo').format('YYYY/MM/DD')
+    const value = formatDate(data)
     return value + japaneseWeek(value)
   }
   return ''
@@ -69,28 +88,28 @@ export const formatDataWithDayOfWeek = (data: string | null): string => {
  */
 export const formatYear = (data: string | null): string => {
   if (dayjs(data).isValid()) {
-    return dayjs(data).tz('Asia/Tokyo').format('YYYY')
+    return formatDayjs(data).format('YYYY')
   }
   return ''
 }
 
 /**
- * 指定した日付をMM-DD (曜日)に変換する
+ * 指定した日付をMM/DD (曜日)に変換する
  */
 export const formatMonthDayWithDayOfWeek = (data: string | null): string => {
   if (dayjs(data).isValid()) {
-    const value = dayjs(data).tz('Asia/Tokyo').format('MM/DD')
+    const value = formatDayjs(data).format('MM/DD')
     return value + japaneseWeek(value)
   }
   return ''
 }
 
 /**
- * 指定した日付をYYYY-MM-DD HH:mmに変換する
+ * 指定した日付をYYYY/MM/DD HH:mmに変換する
  */
-export const formatDataWithTime = (data: string | null): string => {
+export const formatDateWithTime = (data: string | null): string => {
   if (dayjs(data).isValid()) {
-    return dayjs(data).tz('Asia/Tokyo').format('YYYY/MM/DD HH:mm')
+    return formatDayjs(data).format('YYYY/MM/DD HH:mm')
   }
   return ''
 }
@@ -100,27 +119,17 @@ export const formatDataWithTime = (data: string | null): string => {
  */
 export const formatTime = (data: string | null): string => {
   if (dayjs(data).isValid()) {
-    return dayjs(data).tz('Asia/Tokyo').format('HH:mm')
+    return formatDayjs(data).format('HH:mm')
   }
   return ''
 }
-
-/**
- * 現在日時からHHを取得する
- */
-export const currentHour = dayjs().tz('Asia/Tokyo').format('HH')
-
-/**
- * 指定した日時からmmに変換する
- */
-export const currentMinutes = dayjs().tz('Asia/Tokyo').format('mm')
 
 /**
  * 指定した日時から1日後の日時を取得し、文字列に変換する
  */
 export const addDay = (date: string, type: ManipulateType = 'day'): string => {
   if (dayjs(date).isValid()) {
-    return dayjs(date).tz('Asia/Tokyo').add(1, type).toString()
+    return formatDayjs(date).add(1, type).toString()
   }
   return ''
 }
@@ -130,7 +139,7 @@ export const addDay = (date: string, type: ManipulateType = 'day'): string => {
  */
 export const subtractDay = (date: string, type: ManipulateType = 'day'): string => {
   if (dayjs(date).isValid()) {
-    return dayjs(date).tz('Asia/Tokyo').subtract(1, type).toString()
+    return formatDayjs(date).subtract(1, type).toString()
   }
   return ''
 }
@@ -140,7 +149,7 @@ export const subtractDay = (date: string, type: ManipulateType = 'day'): string 
  */
 export const formatDayOfWeek = (date: string): string => {
   if (dayjs(date).isValid()) {
-    return dayjs(date).tz('Asia/Tokyo').format('d')
+    return formatDayjs(date).format('d')
   }
   return ''
 }
@@ -150,7 +159,7 @@ export const formatDayOfWeek = (date: string): string => {
  */
 export const getThisMondayDay = (date: string): string => {
   if (!dayjs(date).isValid()) return ''
-  const weekStart = dayjs(date).tz('Asia/Tokyo').startOf('week')
+  const weekStart = formatDayjs(date).startOf('week')
   // NOTE: dateが日曜日の場合、先週(6日前)の月曜日を返す
   if (formatDayOfWeek(date) === DAY_OF_WEEK.SUNDAY) {
     return addDay(weekStart.subtract(1, 'week').toString())
@@ -164,7 +173,7 @@ export const getThisMondayDay = (date: string): string => {
 
 export const getThisSundayDay = (date: string): string => {
   if (!dayjs(date).isValid()) return ''
-  const weekEnd = dayjs(date).tz('Asia/Tokyo').endOf('week')
+  const weekEnd = formatDayjs(date).endOf('week')
   // NOTE: dateが日曜日の場合、本日の日付を返す
   if (formatDayOfWeek(date) === DAY_OF_WEEK.SUNDAY) {
     return date.toString()

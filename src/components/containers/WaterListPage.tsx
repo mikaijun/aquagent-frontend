@@ -4,7 +4,7 @@ import { ArrowLeftIcon, ArrowRightIcon } from 'lucide-react'
 import { useRouter } from 'next/navigation'
 import { GoPlus } from 'react-icons/go'
 
-import { addDay, formatData, formatDataWithDayOfWeek, subtractDay } from '@/utils/format'
+import { addDay, formatDate, formatDateWithDayOfWeek, subtractDay } from '@/utils/format'
 
 import { WaterFormSheet } from '@/components/containers/WaterFormSheet'
 import { WaterScrollArea } from '@/components/modules/WaterScrollArea'
@@ -23,12 +23,12 @@ const WaterListPage: React.FC<WaterListPageProps> = ({ waters, date }) => {
   const router = useRouter()
 
   const handlePreviousDay = () => {
-    const targetDay = formatData(subtractDay(date))
+    const targetDay = formatDate(subtractDay(date))
     router.push(PagePath.loggedIn.listWithDate(targetDay))
   }
 
   const handleNextDay = () => {
-    const targetDay = formatData(addDay(date))
+    const targetDay = formatDate(addDay(date))
     router.push(PagePath.loggedIn.listWithDate(targetDay))
   }
 
@@ -39,7 +39,7 @@ const WaterListPage: React.FC<WaterListPageProps> = ({ waters, date }) => {
           <ArrowLeftIcon className='h-6 w-6 text-gray-800' />
         </button>
         <p className='text-xl font-extrabold text-center text-gray-800 mx-4'>
-          {formatDataWithDayOfWeek(date)}
+          {formatDateWithDayOfWeek(date)}
         </p>
         <button className='p-2' onClick={handleNextDay}>
           <ArrowRightIcon className='h-6 w-6 text-gray-800' />

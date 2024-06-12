@@ -5,7 +5,7 @@ import Link from 'next/link'
 import {
   addDay,
   currentTimeDate,
-  formatData,
+  formatDate,
   formatMonthDayWithDayOfWeek,
   formatYear,
   getThisMondayDay,
@@ -29,8 +29,8 @@ const ReportPage = async ({
 }: {
   searchParams?: { week: string; month: string }
 }) => {
-  const week = searchParams?.week ?? formatData(currentTimeDate)
-  const month = searchParams?.month ?? formatData(currentTimeDate)
+  const week = searchParams?.week ?? formatDate(currentTimeDate)
+  const month = searchParams?.month ?? formatDate(currentTimeDate)
 
   const weekResponse = await fetchWaters({
     start: getThisMondayDay(week),
@@ -39,7 +39,7 @@ const ReportPage = async ({
   const weekWaters = (await weekResponse.json()) as WaterResponse[]
 
   // const monthResponse = await fetchWaters({
-  //   month: formatData(month),
+  //   month: formatDate(month),
   // })
   // const monthWaters = (await monthResponse.json()) as WaterResponse[]
   return (
@@ -50,7 +50,7 @@ const ReportPage = async ({
           <div className='font-extrabold text-center text-gray-800 flex justify-center gap-2'>
             <Link
               href={PagePath.loggedIn.reportWithDate(
-                formatData(subtractDay(week, 'week')),
+                formatDate(subtractDay(week, 'week')),
                 month,
               )}
               rel='prev'
@@ -62,7 +62,7 @@ const ReportPage = async ({
             <p>{formatMonthDayWithDayOfWeek(getThisSundayDay(week))}</p>
             <Link
               href={PagePath.loggedIn.reportWithDate(
-                formatData(addDay(week, 'week')),
+                formatDate(addDay(week, 'week')),
                 month,
               )}
               rel='next'

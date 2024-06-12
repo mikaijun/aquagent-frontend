@@ -5,7 +5,7 @@ import { IoIosArrowForward } from 'react-icons/io'
 
 import {
   currentTimeDate,
-  formatData,
+  formatDate,
   getThisMondayDay,
   getThisSundayDay,
 } from '@/utils/format'
@@ -23,14 +23,14 @@ export const metadata: Metadata = {
 }
 
 const HomePage = async () => {
-  const currentDate = formatData(currentTimeDate)
+  const currentDate = formatDate(currentTimeDate)
 
   const res = await fetchWaters({
-    start: formatData(getThisMondayDay(currentDate)),
-    end: formatData(getThisSundayDay(currentDate)),
+    start: formatDate(getThisMondayDay(currentDate)),
+    end: formatDate(getThisSundayDay(currentDate)),
   })
   const waters = (await res.json()) as WaterResponse[]
-  const todayWaters = waters.filter((water) => formatData(water.DrankAt) === currentDate)
+  const todayWaters = waters.filter((water) => formatDate(water.DrankAt) === currentDate)
 
   const todayVolume = todayWaters.reduce((acc, cur) => acc + cur.Volume, 0)
   return (

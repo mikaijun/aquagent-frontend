@@ -4,7 +4,7 @@ import { useRouter } from 'next/navigation'
 import { useCallback, useState } from 'react'
 import { type DayContentProps } from 'react-day-picker'
 
-import { addDay, formatData } from '@/utils/format'
+import { addDay, formatDate } from '@/utils/format'
 
 import { Calendar } from '@/components/ui/calendar'
 
@@ -27,7 +27,7 @@ export const WaterCalendar: React.FC<WaterCalendarProps> = ({ waters, week, mont
 
   const handleMonthChange = useCallback(
     (date: Date) => {
-      const target = formatData(date.toDateString())
+      const target = formatDate(date.toDateString())
       router.push(PagePath.loggedIn.reportWithDate(week, target))
     },
     [router, week],
@@ -55,7 +55,7 @@ type CustomDayContentProps = DayContentProps & {
 const CustomDayContent: React.FC<CustomDayContentProps> = ({ waters, ...props }) => {
   const date = props.date.getDate()
   const targetWater = waters.filter(
-    (water) => formatData(water.DrankAt) === formatData(props.date.toDateString()),
+    (water) => formatDate(water.DrankAt) === formatDate(props.date.toDateString()),
   )
   const volume = targetWater.reduce((acc, cur) => acc + cur.Volume, 0)
   return (
