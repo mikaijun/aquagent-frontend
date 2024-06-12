@@ -14,6 +14,7 @@ import {
 } from '@/utils/format'
 
 import WaterBarChart from '@/components/modules/WaterBarChart'
+// import { WaterCalendar } from '@/components/modules/WaterCalendar'
 import { Card, CardContent, CardHeader } from '@/components/ui/card'
 
 import { WaterResponse, fetchWaters } from '@/app/(action)/water'
@@ -23,33 +24,47 @@ export const metadata: Metadata = {
   title: 'レポート',
 }
 
-const ReportPage = async ({ searchParams }: { searchParams?: { date: string } }) => {
-  const date = searchParams?.date ?? formatData(currentTimeDate)
+const ReportPage = async ({
+  searchParams,
+}: {
+  searchParams?: { week: string; month: string }
+}) => {
+  const week = searchParams?.week ?? formatData(currentTimeDate)
+  const month = searchParams?.month ?? formatData(currentTimeDate)
 
-  const res = await fetchWaters({
-    start: getThisMondayDay(date),
-    end: getThisSundayDay(date),
+  const weekResponse = await fetchWaters({
+    start: getThisMondayDay(week),
+    end: getThisSundayDay(week),
   })
-  const waters = (await res.json()) as WaterResponse[]
+  const weekWaters = (await weekResponse.json()) as WaterResponse[]
+
+  // const monthResponse = await fetchWaters({
+  //   month: formatData(month),
+  // })
+  // const monthWaters = (await monthResponse.json()) as WaterResponse[]
   return (
     <div className='pt-8 pb-16 px-4'>
-      <Card>
+      <Card className='mb-4'>
         <CardHeader className='block'>
-          <p className='font-extrabold text-center text-gray-800'>{formatYear(date)}年</p>
+          <p className='font-extrabold text-center text-gray-800'>{formatYear(week)}年</p>
           <div className='font-extrabold text-center text-gray-800 flex justify-center gap-2'>
             <Link
               href={PagePath.loggedIn.reportWithDate(
-                formatData(subtractDay(date, 'week')),
+                formatData(subtractDay(week, 'week')),
+                month,
               )}
               rel='prev'
             >
               <ArrowLeftIcon className='h-6 w-6 text-gray-800' />
             </Link>
-            <p>{formatMonthDayWithDayOfWeek(getThisMondayDay(date))}</p>
+            <p>{formatMonthDayWithDayOfWeek(getThisMondayDay(week))}</p>
             <p>~</p>
-            <p>{formatMonthDayWithDayOfWeek(getThisSundayDay(date))}</p>
+            <p>{formatMonthDayWithDayOfWeek(getThisSundayDay(week))}</p>
             <Link
-              href={PagePath.loggedIn.reportWithDate(formatData(addDay(date, 'week')))}
+              href={PagePath.loggedIn.reportWithDate(
+                formatData(addDay(week, 'week')),
+                month,
+              )}
               rel='next'
             >
               <ArrowRightIcon className='h-6 w-6 text-gray-800' />
@@ -57,9 +72,12 @@ const ReportPage = async ({ searchParams }: { searchParams?: { date: string } })
           </div>
         </CardHeader>
         <CardContent className='mt-4 h-40 pl-0'>
-          <WaterBarChart waters={waters} />
+          <WaterBarChart waters={weekWaters} />
         </CardContent>
       </Card>
+      {/* <Card className='flex justify-center p-2'>
+        <WaterCalendar month={month} waters={monthWaters} week={week} />
+      </Card> */}
     </div>
   )
 }

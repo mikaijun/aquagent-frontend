@@ -30,6 +30,8 @@ const headerTitle = (currentPath: string) => {
       return 'ホーム'
     case PagePath.loggedIn.list:
       return '水分管理'
+    case PagePath.loggedIn.report:
+      return 'レポート'
     default:
       return 'ホーム'
   }

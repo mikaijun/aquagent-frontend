@@ -11,7 +11,8 @@ export const PagePath = {
     list: '/list',
     listWithDate: (date: string) => `/list?date=${date}`,
     report: '/report',
-    reportWithDate: (date: string) => `/report?date=${date}`,
+    reportWithDate: (week: string, month: string) =>
+      `/report?week=${week}&month=${month}`,
   },
 }
 
