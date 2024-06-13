@@ -28,7 +28,7 @@ export const WaterScrollArea: React.FC<WaterScrollAreaProps> = ({
         {waters.map((water, index) => (
           <React.Fragment key={index}>
             <AreaItem water={water} />
-            <Separator className='my-2' />
+            <Separator className='my-1' />
           </React.Fragment>
         ))}
       </ScrollArea>
@@ -52,7 +52,7 @@ const AreaItem: React.FC<AreaItemProps> = ({ water }) => {
   }, [water, router, toast])
 
   return (
-    <div className='text-sm flex items-center justify-between py-2 px-4'>
+    <div className='text-sm flex items-center justify-between py-1 px-4'>
       <p className='w-20 text-lg'>{water.Volume} ml</p>
       <div className='flex gap-4'>
         <p className='text-xs text-slate-500'>{formatTime(water.DrankAt)}</p>
