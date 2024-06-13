@@ -15,19 +15,12 @@ export type WaterResponse = {
 }
 
 type QueryType = {
-  date?: string
-  start?: string
-  end?: string
+  start: string
+  end: string
 }
 
-const generateEndPoint = ({ date, start, end }: QueryType) => {
-  if (date) {
-    return endPoint.loggedIn.watersFilterDate(date)
-  } else if (start && end) {
-    return endPoint.loggedIn.watersRange(start, end)
-  } else {
-    return endPoint.loggedIn.waters
-  }
+const generateEndPoint = ({ start, end }: QueryType) => {
+  return endPoint.loggedIn.watersRange(start, end)
 }
 
 export async function saveWater({
@@ -78,12 +71,11 @@ export async function deleteWater({ id }: { id: number }) {
 }
 
 export async function fetchWaters({
-  date,
   start,
   end,
 }: QueryType): Promise<NextResponse<WaterResponse[]>> {
   const cookiesStore = cookies()
-  const url = generateEndPoint({ date, start, end })
+  const url = generateEndPoint({ start, end })
   try {
     const response = await fetch(url, {
       headers: {

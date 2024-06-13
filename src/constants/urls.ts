@@ -24,7 +24,6 @@ export const endPoint = {
   loggedIn: {
     users: `${baseurl}/v1/users`,
     waters: `${baseurl}/v1/waters`,
-    watersFilterDate: (date: string) => `${baseurl}/v1/waters?date=${date}`,
     watersRange: (start: string, end: string) =>
       `${baseurl}/v1/waters?start=${start}&end=${end}`,
     water: (id: number) => `${baseurl}/v1/waters/${id}`,

@@ -12,7 +12,10 @@ export const metadata: Metadata = {
 
 const ListPage = async ({ searchParams }: { searchParams?: { date: string } }) => {
   const date = searchParams?.date ?? formatDate(currentTimeDate)
-  const res = await fetchWaters({ date })
+  const res = await fetchWaters({
+    start: date,
+    end: date,
+  })
   const waters = (await res.json()) as WaterResponse[]
   return <WaterListPage date={date} waters={waters} />
 }
