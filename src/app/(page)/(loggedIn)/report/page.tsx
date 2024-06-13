@@ -8,13 +8,15 @@ import {
   formatDate,
   formatMonthDayWithDayOfWeek,
   formatYear,
+  getBeginningMonth,
+  getEndMonth,
   getThisSaturDay,
   getThisSundayDay,
   subtractDay,
 } from '@/utils/format'
 
 import WaterBarChart from '@/components/modules/WaterBarChart'
-// import { WaterCalendar } from '@/components/modules/WaterCalendar'
+import { WaterCalendar } from '@/components/modules/WaterCalendar'
 import { Card, CardContent, CardHeader } from '@/components/ui/card'
 
 import { WaterResponse, fetchWaters } from '@/app/(action)/water'
@@ -38,10 +40,11 @@ const ReportPage = async ({
   })
   const weekWaters = (await weekResponse.json()) as WaterResponse[]
 
-  // const monthResponse = await fetchWaters({
-  //   month: formatDate(month),
-  // })
-  // const monthWaters = (await monthResponse.json()) as WaterResponse[]
+  const monthResponse = await fetchWaters({
+    start: formatDate(getBeginningMonth(month)),
+    end: formatDate(getEndMonth(month)),
+  })
+  const monthWaters = (await monthResponse.json()) as WaterResponse[]
   return (
     <div className='pt-8 pb-16 px-4'>
       <Card className='mb-4'>
@@ -50,7 +53,7 @@ const ReportPage = async ({
           <div className='font-extrabold text-center text-gray-800 flex justify-center gap-2'>
             <Link
               href={PagePath.loggedIn.reportWithDate(
-                formatDate(subtractDay(week, 'week')),
+                formatDate(getThisSundayDay(subtractDay(week, 'week'))),
                 month,
               )}
               rel='prev'
@@ -62,7 +65,7 @@ const ReportPage = async ({
             <p>{formatMonthDayWithDayOfWeek(getThisSaturDay(week))}</p>
             <Link
               href={PagePath.loggedIn.reportWithDate(
-                formatDate(addDay(week, 'week')),
+                formatDate(getThisSundayDay(addDay(week, 'week'))),
                 month,
               )}
               rel='next'
@@ -75,9 +78,9 @@ const ReportPage = async ({
           <WaterBarChart waters={weekWaters} />
         </CardContent>
       </Card>
-      {/* <Card className='flex justify-center p-2'>
+      <Card className='flex justify-center p-2'>
         <WaterCalendar month={month} waters={monthWaters} week={week} />
-      </Card> */}
+      </Card>
     </div>
   )
 }

@@ -88,6 +88,14 @@ export const formatYear = (date: string | null): string => {
 }
 
 /**
+ * 指定した日程からをMMに変換する
+ */
+export const formatMonth = (date: string | null): string => {
+  if (!dayjs(date).isValid()) return ''
+  return formatDayjs(date).format('MM')
+}
+
+/**
  * 指定した日付をMM/DD (曜日)に変換する
  */
 export const formatMonthDayWithDayOfWeek = (date: string | null): string => {
@@ -113,7 +121,7 @@ export const formatTime = (date: string | null): string => {
 }
 
 /**
- * 指定した日時から1日後の日時を取得し、文字列に変換する
+ * 指定した日時からx後の日時を取得、文字列に変換する
  */
 export const addDay = (date: string, type: ManipulateType = 'day'): string => {
   if (!dayjs(date).isValid()) return ''
@@ -121,7 +129,7 @@ export const addDay = (date: string, type: ManipulateType = 'day'): string => {
 }
 
 /**
- * 指定した日時から1日前の日時を取得、文字列に変換する
+ * 指定した日時からx前の日時を取得、文字列に変換する
  */
 export const subtractDay = (date: string, type: ManipulateType = 'day'): string => {
   if (!dayjs(date).isValid()) return ''
@@ -151,4 +159,22 @@ export const getThisSundayDay = (date: string): string => {
 export const getThisSaturDay = (date: string): string => {
   if (!dayjs(date).isValid()) return ''
   return formatDayjs(date).endOf('week').toString()
+}
+
+/**
+ * 指定した日時の月初の日付を取得し、文字列に変換する
+ */
+
+export const getBeginningMonth = (date: string): string => {
+  if (!dayjs(date).isValid()) return ''
+  return formatDayjs(date).startOf('month').toString()
+}
+
+/**
+ * 指定した日時の月末の日付を取得し、文字列に変換する
+ */
+
+export const getEndMonth = (date: string): string => {
+  if (!dayjs(date).isValid()) return ''
+  return formatDayjs(date).endOf('month').toString()
 }

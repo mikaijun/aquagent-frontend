@@ -59,9 +59,12 @@ const CustomDayContent: React.FC<CustomDayContentProps> = ({ waters, ...props })
   )
   const volume = targetWater.reduce((acc, cur) => acc + cur.Volume, 0)
   return (
-    <span style={{ position: 'relative', overflow: 'visible' }}>
-      <p>{date}</p>
-      <p>{volume}</p>
-    </span>
+    <div style={{ position: 'relative', overflow: 'visible' }}>
+      <p className='text-xs'>{date}</p>
+      <p className='text-[10px]'>
+        {volume}
+        <span className='text-[6px]'>ml</span>
+      </p>
+    </div>
   )
 }

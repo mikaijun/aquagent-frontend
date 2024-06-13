@@ -1,8 +1,10 @@
 'use client'
 
+import { format } from 'date-fns'
+import { ja } from 'date-fns/locale'
 import { ChevronLeft, ChevronRight } from 'lucide-react'
 import * as React from 'react'
-import { DayPicker } from 'react-day-picker'
+import { DateFormatter, DayPicker } from 'react-day-picker'
 
 import { buttonVariants } from '@/components/ui/button'
 
@@ -10,6 +12,11 @@ import { cn } from '@/lib/utils'
 
 export type CalendarProps = React.ComponentProps<typeof DayPicker>
 
+const formatCaption: DateFormatter = (date, options) => {
+  const y = format(date, 'yyyy')
+  const m = format(date, 'MM', { locale: options?.locale })
+  return `${y}年${m}月`
+}
 function Calendar({
   className,
   classNames,
@@ -55,6 +62,8 @@ function Calendar({
         IconLeft: () => <ChevronLeft className='h-4 w-4' />,
         IconRight: () => <ChevronRight className='h-4 w-4' />,
       }}
+      formatters={{ formatCaption }}
+      locale={ja}
       showOutsideDays={showOutsideDays}
       {...props}
     />
