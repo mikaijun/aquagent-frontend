@@ -2,9 +2,10 @@
 
 import { SubmissionResult, useForm } from '@conform-to/react'
 import { parseWithZod } from '@conform-to/zod'
+import { Loader2 } from 'lucide-react'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
-import { useCallback, useEffect } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import { useFormState } from 'react-dom'
 
 import {
@@ -34,6 +35,7 @@ type LoginFormPageProps = {
 }
 
 const LoginFormPage: React.FC<LoginFormPageProps> = ({ query }) => {
+  const [isLoading, setIsLoading] = useState<boolean>(false)
   const router = useRouter()
   const { toast } = useToast()
   const [lastResult, action] = useFormState(login, initialState)
@@ -47,10 +49,12 @@ const LoginFormPage: React.FC<LoginFormPageProps> = ({ query }) => {
   })
 
   const handleTestLogin = useCallback(async () => {
+    setIsLoading(true)
     const formData = new FormData()
     formData.append('email', 'test@co.jp')
     formData.append('password', 'password')
     await login({}, formData)
+    setIsLoading(false)
   }, [])
 
   useEffect(() => {
@@ -63,7 +67,13 @@ const LoginFormPage: React.FC<LoginFormPageProps> = ({ query }) => {
   return (
     <>
       <div className='flex justify-center mb-8'>
-        <Button onClick={handleTestLogin}>お試しで使ってみる</Button>
+        <Button className='w-40' onClick={handleTestLogin}>
+          {isLoading ? (
+            <Loader2 className='mr-2 h-4 w-4 animate-spin' />
+          ) : (
+            <p>お試しで使ってみる</p>
+          )}
+        </Button>
       </div>
       <Accordion collapsible type='single'>
         <AccordionItem className='border-y-0' value='item-1'>
