@@ -1,6 +1,7 @@
 import dayjs, { ManipulateType } from 'dayjs'
 import timezone from 'dayjs/plugin/timezone'
 import utc from 'dayjs/plugin/utc'
+dayjs.locale('ja')
 dayjs.extend(utc)
 dayjs.extend(timezone)
 
@@ -67,7 +68,7 @@ export const currentMinutes = formatDayjs().format('mm')
  */
 export const formatDate = (date: string | null): string => {
   if (!dayjs(date).isValid()) return ''
-  return dayjs(date).tz('Asia/Tokyo').format('YYYY/MM/DD')
+  return formatDayjs(date).format('YYYY/MM/DD')
 }
 
 /**
