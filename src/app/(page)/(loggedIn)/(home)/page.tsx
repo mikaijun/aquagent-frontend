@@ -42,19 +42,6 @@ const HomePage = async () => {
             <GoPlus size='30px' />
           </Card>
         </SheetTrigger>
-        <Card className='mb-4'>
-          {waters.map((water) => (
-            <>
-              <CardHeader>
-                <CardTitle className='text-xl font-extrabold'>{water.Volume}ml</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className='text-gray-500'>整形前: {water.DrankAt}</p>
-                <p className='text-gray-500'>整形後: {formatDate(water.DrankAt)}</p>
-              </CardContent>
-            </>
-          ))}
-        </Card>
       </WaterFormSheet>
       <a className='text-primary mt-4' href={PagePath.loggedIn.list}>
         <Card className='mb-4'>
