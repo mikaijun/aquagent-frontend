@@ -44,6 +44,7 @@ export const WaterFormSheet: React.FC<WaterFormSheetProps> = ({ date, children }
     hour: currentHour,
     minute: currentMinutes,
   })
+  console.log('serverのcurrentDate', date)
 
   const handleSave = useCallback(async () => {
     const drank_at = `${date} ${pickerValue.hour}:${pickerValue.minute}`
