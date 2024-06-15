@@ -1,9 +1,12 @@
 import dayjs, { ManipulateType } from 'dayjs'
 import timezone from 'dayjs/plugin/timezone'
 import utc from 'dayjs/plugin/utc'
-dayjs.locale('ja')
+import 'dayjs/locale/ja'
 dayjs.extend(utc)
 dayjs.extend(timezone)
+
+dayjs.locale('ja')
+dayjs.tz.setDefault('Asia/Tokyo')
 
 export const DAY_OF_WEEK = {
   SUNDAY: '0',
