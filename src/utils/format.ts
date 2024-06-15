@@ -66,9 +66,9 @@ export const currentMinutes = formatDayjs().format('mm')
 /**
  * 指定した日付をYYYY/MM/DDに変換する
  */
-export const formatDate = (date: string | null): string => {
-  if (!dayjs(date).isValid()) return ''
-  return formatDayjs(date).format('YYYY/MM/DD')
+export const formatDate = (data: string | null): string => {
+  if (!dayjs(data).isValid()) return ''
+  return dayjs(data).tz('Asia/Tokyo').format('YYYY-MM-DD')
 }
 
 /**
