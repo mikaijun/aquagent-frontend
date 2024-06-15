@@ -5,7 +5,6 @@ import 'dayjs/locale/ja'
 dayjs.extend(utc)
 dayjs.extend(timezone)
 
-dayjs.locale('ja')
 dayjs.tz.setDefault('Asia/Tokyo')
 
 export const DAY_OF_WEEK = {
@@ -46,9 +45,9 @@ const japaneseWeek = (date: string) => {
  */
 const formatDayjs = (date?: string | null) => {
   if (date) {
-    return dayjs(date).tz('Asia/Tokyo')
+    return dayjs(date).tz()
   }
-  return dayjs().tz('Asia/Tokyo')
+  return dayjs(date).tz()
 }
 
 /**
