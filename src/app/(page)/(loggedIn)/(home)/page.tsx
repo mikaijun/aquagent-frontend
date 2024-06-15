@@ -30,7 +30,11 @@ const HomePage = async () => {
     end: formatDate(getThisSaturDay(currentDate)),
   })
   const waters = (await res.json()) as WaterResponse[]
-  const todayWaters = waters.filter((water) => formatDate(water.DrankAt) === currentDate)
+  const todayRes = await fetchWaters({
+    start: formatDate(currentDate),
+    end: formatDate(currentDate),
+  })
+  const todayWaters = (await todayRes.json()) as WaterResponse[]
 
   const todayVolume = todayWaters.reduce((acc, cur) => acc + cur.Volume, 0)
   return (
