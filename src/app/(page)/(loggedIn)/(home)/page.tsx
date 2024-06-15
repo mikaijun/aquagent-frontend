@@ -42,8 +42,6 @@ const HomePage = async () => {
             <GoPlus size='30px' />
           </Card>
         </SheetTrigger>
-        <p>{currentTimeDate}</p>
-        <p>{currentDate}</p>
       </WaterFormSheet>
       <a className='text-primary mt-4' href={PagePath.loggedIn.list}>
         <Card className='mb-4'>
