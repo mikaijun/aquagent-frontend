@@ -2,7 +2,7 @@
 
 import { Bar, BarChart, ResponsiveContainer, XAxis, YAxis, CartesianGrid } from 'recharts'
 
-import { DAY_OF_WEEK, formatDayOfWeek } from '@/utils/format'
+import { DAY_OF_WEEK, currentTimeDate, formatDate, formatDayOfWeek } from '@/utils/format'
 
 import { WaterResponse } from '@/app/(action)/water'
 
@@ -27,6 +27,10 @@ const calculationVolume = (waters: AddDayOfWeekWatersType[], datOfWeek: string) 
 }
 
 const WaterBarChart: React.FC<WaterBarChartProps> = ({ waters }) => {
+  const currentDate = formatDate(currentTimeDate)
+  console.log('currentDate', currentDate)
+  waters.map((water) => console.log('water', water))
+  waters.map((water) => console.log('formatDate', formatDate(water.DrankAt)))
   const formatWaters = addDayOfWeekWaters(waters)
 
   const data = [

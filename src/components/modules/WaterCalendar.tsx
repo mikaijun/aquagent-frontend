@@ -18,7 +18,6 @@ type WaterCalendarProps = {
 }
 
 export const WaterCalendar: React.FC<WaterCalendarProps> = ({ waters, week, month }) => {
-  console.log(waters)
   const [date, setDate] = useState<Date | undefined>(new Date())
   const router = useRouter()
   const handlePrevClick = useCallback(() => {
