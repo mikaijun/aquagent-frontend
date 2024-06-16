@@ -1,36 +1,29 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+※こちらはフロントエンドのリポジトリです。
+バックエンドのリポジトリは[こちら](https://github.com/mikaijun/aquagent-backend)になります。
 
-## Getting Started
+# アプリケーションURL
+https://aquagent-frontend.vercel.app/
 
-First, run the development server:
+ログインする時にメールアドレスや各種SNSは不要です(お試しアカウントでログインできます)
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+# 概要
+水分摂取量を管理するアプリ
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+# 機能一覧
+- 水分摂取をml単位で記録する
+- 本日摂取した水分量をml単位で確認できる
+- 1日単位で水分摂取量と摂取時間を確認できる
+- グラフで水分摂取量を確認できる(1週間単位)
+- カレンダーで水分摂取量を確認できる(1ヶ月単位)
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+# 主な使用技術
+- Next.js(v14.2.3)
+- React.js(v18.3.1)
+- TypeScript(v5.4.5)
+- NextPWA(v5.6.0)
+- Conform (v1.1.4)
+- Dayjs(v1.11.11)
+- Zod(v3.23.8)
+- shadcn/ui(v0.8.0)
+- Tailwind CSS(v3.4.3)
+- Vercel(デプロイ機能)
