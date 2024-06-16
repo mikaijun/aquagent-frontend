@@ -47,6 +47,25 @@
     --input: 217.2 32.6% 17.5%;
     --ring: 224.3 76.3% 48%;
   }
+
+  .balloon {
+    background-color: #fff;
+    border-radius: 1rem;
+    padding: 16px;
+    position: relative;
+  }
+
+  .balloon::after {
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: 25%;
+    transform: translateX(-50%);
+    background-color: #fff;
+    width: 32px;
+    height: 16px;
+    clip-path: polygon(0 0, 0% 100%, 100% 0);
+  }
 }
 
 @layer base {

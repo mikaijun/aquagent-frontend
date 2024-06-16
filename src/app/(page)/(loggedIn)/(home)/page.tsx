@@ -1,4 +1,5 @@
 import { Metadata } from 'next'
+import Image from 'next/image'
 import React from 'react'
 import { GoPlus } from 'react-icons/go'
 import { IoIosArrowForward } from 'react-icons/io'
@@ -39,14 +40,20 @@ const HomePage = async () => {
   const todayVolume = todayWaters.reduce((acc, cur) => acc + cur.Volume, 0)
   return (
     <div className='pt-8 pb-16 px-4'>
-      <WaterFormSheet date={currentDate}>
-        <SheetTrigger className='block mx-auto mb-12'>
-          <Card className='shadow-2xl p-4 w-full max-w-lg mx-auto  bg-primary text-white rounded-lg flex items-center'>
-            <p className='text-xl font-bold'>飲んだ水を記録する</p>
-            <GoPlus size='30px' />
-          </Card>
-        </SheetTrigger>
-      </WaterFormSheet>
+      <div className='flex items-start mb-2'>
+        <Image
+          alt='logo'
+          className='mt-20'
+          height={120}
+          src='/character/wink.png'
+          width={120}
+        />
+        <div className='base balloon'>
+          <p>こんにちは！</p>
+          <p>今日も水分補給を忘れずに！</p>
+        </div>
+      </div>
+
       <a className='text-primary mt-4' href={PagePath.loggedIn.list}>
         <Card className='mb-4'>
           <CardHeader>
@@ -71,6 +78,14 @@ const HomePage = async () => {
           </CardContent>
         </Card>
       </a>
+      <WaterFormSheet date={currentDate}>
+        <SheetTrigger className='block mx-auto mb-12'>
+          <GoPlus
+            className='shadow-2xl w-12  h-12 bg-primary text-white rounded-full fixed right-4 bottom-20'
+            size='30px'
+          />
+        </SheetTrigger>
+      </WaterFormSheet>
     </div>
   )
 }
