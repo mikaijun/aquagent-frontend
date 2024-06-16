@@ -66,6 +66,14 @@
     height: 16px;
     clip-path: polygon(0 0, 0% 100%, 100% 0);
   }
+
+  @media (min-width: 768px) {
+    .fixed-center-right {
+      position: fixed;
+      bottom: 80px;
+      right: calc((100% - 760px) / 2);
+    }
+  }
 }
 
 @layer base {

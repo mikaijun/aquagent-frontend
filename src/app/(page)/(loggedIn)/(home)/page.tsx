@@ -81,7 +81,7 @@ const HomePage = async () => {
       <WaterFormSheet date={currentDate}>
         <SheetTrigger className='block mx-auto mb-12'>
           <GoPlus
-            className='shadow-2xl w-12  h-12 bg-primary text-white rounded-full fixed right-4 bottom-20'
+            className='shadow-2xl w-16  h-16 bg-primary text-white rounded-full fixed right-4 bottom-20 md:fixed-center-right'
             size='30px'
           />
         </SheetTrigger>
