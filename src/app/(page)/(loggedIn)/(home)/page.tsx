@@ -1,5 +1,6 @@
 import { Metadata } from 'next'
 import Image from 'next/image'
+import Link from 'next/link'
 import React from 'react'
 import { GoPlus } from 'react-icons/go'
 import { IoIosArrowForward } from 'react-icons/io'
@@ -54,7 +55,7 @@ const HomePage = async () => {
         </div>
       </div>
 
-      <a className='text-primary mt-4' href={PagePath.loggedIn.list}>
+      <Link className='text-primary mt-4' href={PagePath.loggedIn.list}>
         <Card className='mb-4'>
           <CardHeader>
             <CardTitle className='text-xl font-extrabold'> 本日の水分量</CardTitle>
@@ -64,8 +65,8 @@ const HomePage = async () => {
             <IoIosArrowForward size='28px' />
           </CardContent>
         </Card>
-      </a>
-      <a href={PagePath.loggedIn.report}>
+      </Link>
+      <Link href={PagePath.loggedIn.report}>
         <Card>
           <CardHeader className='flex flex-row items-center justify-between space-y-0 pb-2'>
             <div className='flex items-center justify-between w-full'>
@@ -77,7 +78,7 @@ const HomePage = async () => {
             <WaterBarChart waters={waters} />
           </CardContent>
         </Card>
-      </a>
+      </Link>
       <WaterFormSheet date={currentDate}>
         <SheetTrigger className='block mx-auto mb-12'>
           <GoPlus
