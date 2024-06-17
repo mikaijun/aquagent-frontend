@@ -1,4 +1,5 @@
 import { ArrowLeftIcon, ArrowRightIcon } from 'lucide-react'
+import { LoaderIcon } from 'lucide-react'
 import { Metadata } from 'next'
 import Link from 'next/link'
 import { Suspense } from 'react'
@@ -15,7 +16,6 @@ import {
 } from '@/utils/format'
 
 import { Card, CardContent, CardHeader } from '@/components/ui/card'
-import { LoadingSpinner } from '@/components/ui/loading'
 
 import ServerWaterBarChart from '@/app/(page)/(loggedIn)/report/_components/ServerWaterBarChart'
 import ServerWaterCalendar from '@/app/(page)/(loggedIn)/report/_components/ServerWaterCalendar'
@@ -62,14 +62,14 @@ const ReportPage = ({
             </Link>
           </div>
         </CardHeader>
-        <CardContent className='mt-4 h-40 pl-0'>
-          <Suspense fallback={<LoadingSpinner />}>
+        <CardContent className='mt-4 h-40 pl-0 flex justify-center'>
+          <Suspense fallback={<LoaderIcon className='animate-spin' />}>
             <ServerWaterBarChart week={week} />
           </Suspense>
         </CardContent>
       </Card>
       <Card className='flex justify-center p-2'>
-        <Suspense fallback={<LoadingSpinner />}>
+        <Suspense fallback={<LoaderIcon className='animate-spin' />}>
           <ServerWaterCalendar month={month} week={week} />
         </Suspense>
       </Card>
