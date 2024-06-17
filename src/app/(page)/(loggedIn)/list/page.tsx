@@ -18,9 +18,11 @@ const ListPage = ({ searchParams }: { searchParams?: { date: string } }) => {
   return (
     <Suspense
       fallback={
-        <Card className='max-w-lg mx-auto bg-white shadow-lg rounded-lg p-6 shadow-2xl'>
-          <LoaderIcon className='animate-spin' />
-        </Card>
+        <div className='p-4'>
+          <Card className='max-w-lg mx-auto bg-white shadow-lg rounded-lg p-6 shadow-2xl h-96 flex items-center justify-center'>
+            <LoaderIcon className='animate-spin' />
+          </Card>
+        </div>
       }
     >
       <ServerWaterListPage date={date} />
