@@ -68,11 +68,11 @@ const ReportPage = ({
           </Suspense>
         </CardContent>
       </Card>
-      <Card className='flex justify-center p-2'>
+      <div className='flex justify-center'>
         <Suspense fallback={<LoaderIcon className='animate-spin' />}>
           <ServerWaterCalendar month={month} week={week} />
         </Suspense>
-      </Card>
+      </div>
     </div>
   )
 }

@@ -36,7 +36,7 @@ export const WaterCalendar: React.FC<WaterCalendarProps> = ({ waters, week, mont
   return (
     <div>
       <Calendar
-        className='rounded-md border'
+        className='rounded-md border bg-white'
         components={{
           DayContent: (props) => <CustomDayContent {...props} waters={waters} />,
         }}
@@ -63,10 +63,10 @@ const CustomDayContent: React.FC<CustomDayContentProps> = ({ waters, ...props })
   const volume = targetWater.reduce((acc, cur) => acc + cur.Volume, 0)
   return (
     <div style={{ position: 'relative', overflow: 'visible' }}>
-      <p className='text-xs'>{date}</p>
+      <p>{date}</p>
       <p className='text-[10px]'>
         {volume}
-        <span className='text-[6px]'>ml</span>
+        <span className='text-[6px]'></span>
       </p>
     </div>
   )
