@@ -27,3 +27,7 @@ https://aquagent-frontend.vercel.app/
 - shadcn/ui(v0.8.0)
 - Tailwind CSS(v3.4.3)
 - Vercel(デプロイ機能)
+
+# イメージ
+<img width="300" alt="スクリーンショット 2024-06-19 7 27 34" src="https://github.com/mikaijun/aquagent-backend/assets/74134232/19269824-e2e7-42e9-9fef-d6059e5338a9">
+<img width="300" alt="スクリーンショット 2024-06-19 7 27 47" src="https://github.com/mikaijun/aquagent-backend/assets/74134232/f26bb905-718e-4e3e-93c6-1f55463400d2">
