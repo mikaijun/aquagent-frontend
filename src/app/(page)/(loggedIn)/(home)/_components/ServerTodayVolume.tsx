@@ -14,7 +14,7 @@ const ServerTodayVolume = async () => {
   const todayWaters = (await todayRes.json()) as WaterResponse[]
 
   const todayVolume = todayWaters.reduce((acc, cur) => acc + cur.Volume, 0)
-  return <p className='font-extrabold text-4xl'>{todayVolume}ml</p>
+  return <p className='font-extrabold text-4xl text-blue-700'>{todayVolume}ml</p>
 }
 
 export default ServerTodayVolume

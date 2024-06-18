@@ -3,14 +3,12 @@ import { Metadata } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
 import React, { Suspense } from 'react'
-import { GoPlus } from 'react-icons/go'
 import { IoIosArrowForward } from 'react-icons/io'
 
 import { currentTimeDate, formatDate } from '@/utils/format'
 
-import { WaterFormSheet } from '@/components/containers/WaterFormSheet'
+import WaterAddButton from '@/components/containers/WaterAddButton'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import { SheetTrigger } from '@/components/ui/sheet'
 
 import ServerTodayVolume from '@/app/(page)/(loggedIn)/(home)/_components/ServerTodayVolume'
 import ServerWaterBarChart from '@/app/(page)/(loggedIn)/(home)/_components/ServerWaterBarChart'
@@ -42,13 +40,13 @@ const HomePage = () => {
       <Link className='text-primary mt-4' href={PagePath.loggedIn.list}>
         <Card className='mb-4'>
           <CardHeader>
-            <CardTitle className='text-xl font-extrabold'> 本日の水分量</CardTitle>
+            <CardTitle className='text-xl font-extrabold'>本日の水分量</CardTitle>
           </CardHeader>
-          <CardContent className='text-blue-700  flex items-center justify-between'>
+          <CardContent className='flex items-center justify-between'>
             <Suspense fallback={<LoaderIcon className='animate-spin' />}>
               <ServerTodayVolume />
             </Suspense>
-            <IoIosArrowForward size='28px' />
+            <IoIosArrowForward className='text-blue-700' size='28px' />
           </CardContent>
         </Card>
       </Link>
@@ -60,21 +58,14 @@ const HomePage = () => {
               <IoIosArrowForward className='text-primary' size='28px' />
             </div>
           </CardHeader>
-          <CardContent className='mt-4 h-40 p-0'>
+          <CardContent className='mt-4 h-40 p-0 flex items-center justify-center'>
             <Suspense fallback={<LoaderIcon className='animate-spin' />}>
               <ServerWaterBarChart />
             </Suspense>
           </CardContent>
         </Card>
       </Link>
-      <WaterFormSheet date={currentDate}>
-        <SheetTrigger className='block mx-auto mb-12'>
-          <GoPlus
-            className='shadow-2xl w-16  h-16 bg-primary text-white rounded-full fixed right-4 bottom-20 md:fixed-center-right'
-            size='30px'
-          />
-        </SheetTrigger>
-      </WaterFormSheet>
+      <WaterAddButton date={currentDate} />
     </div>
   )
 }

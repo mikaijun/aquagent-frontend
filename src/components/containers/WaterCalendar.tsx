@@ -6,6 +6,7 @@ import { type DayContentProps } from 'react-day-picker'
 
 import { addDay, formatDate } from '@/utils/format'
 
+import WaterAddButton from '@/components/containers/WaterAddButton'
 import { Calendar } from '@/components/ui/calendar'
 
 import { WaterResponse } from '@/app/(action)/water'
@@ -33,17 +34,20 @@ export const WaterCalendar: React.FC<WaterCalendarProps> = ({ waters, week, mont
   )
 
   return (
-    <Calendar
-      className='rounded-md border'
-      components={{
-        DayContent: (props) => <CustomDayContent {...props} waters={waters} />,
-      }}
-      mode='single'
-      selected={date}
-      onMonthChange={handleMonthChange}
-      onPrevClick={handlePrevClick}
-      onSelect={setDate}
-    />
+    <div>
+      <Calendar
+        className='rounded-md border'
+        components={{
+          DayContent: (props) => <CustomDayContent {...props} waters={waters} />,
+        }}
+        mode='single'
+        selected={date}
+        onMonthChange={handleMonthChange}
+        onPrevClick={handlePrevClick}
+        onSelect={setDate}
+      />
+      <WaterAddButton date={formatDate(date?.toString() ?? '')} />
+    </div>
   )
 }
 

@@ -1,6 +1,6 @@
 import { formatDate, getBeginningMonth, getEndMonth } from '@/utils/format'
 
-import { WaterCalendar } from '@/components/modules/WaterCalendar'
+import { WaterCalendar } from '@/components/containers/WaterCalendar'
 
 import { WaterResponse, fetchWaters } from '@/app/(action)/water'
 

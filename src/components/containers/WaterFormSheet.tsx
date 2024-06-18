@@ -94,9 +94,10 @@ export const WaterFormSheet: React.FC<WaterFormSheetProps> = ({ date, children }
           ))}
         </RadioGroup>
         <TimeDrumRoll pickerValue={pickerValue} onPickerChange={handlePickerChange}>
-          <DialogTrigger className='flex items-center gap-2 m-auto my-8 text-gray-700'>
+          <p className='text-center my-4 text-sm'>{date}</p>
+          <DialogTrigger className='flex items-center gap-2 m-auto mb-8 text-gray-700 border border-input p-3 rounded-lg'>
             <IoTime size='18px' />
-            <p className='text-lg'>
+            <p className='text-xl'>
               {pickerValue.hour}:{pickerValue.minute}
             </p>
           </DialogTrigger>
