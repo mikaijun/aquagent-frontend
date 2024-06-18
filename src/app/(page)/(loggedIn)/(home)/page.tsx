@@ -1,44 +1,28 @@
+import { LoaderIcon } from 'lucide-react'
 import { Metadata } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
-import React from 'react'
+import React, { Suspense } from 'react'
 import { GoPlus } from 'react-icons/go'
 import { IoIosArrowForward } from 'react-icons/io'
 
-import {
-  currentTimeDate,
-  formatDate,
-  getThisSaturDay,
-  getThisSundayDay,
-} from '@/utils/format'
+import { currentTimeDate, formatDate } from '@/utils/format'
 
 import { WaterFormSheet } from '@/components/containers/WaterFormSheet'
-import WaterBarChart from '@/components/modules/WaterBarChart'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { SheetTrigger } from '@/components/ui/sheet'
 
-import { WaterResponse, fetchWaters } from '@/app/(action)/water'
+import ServerTodayVolume from '@/app/(page)/(loggedIn)/(home)/_components/ServerTodayVolume'
+import ServerWaterBarChart from '@/app/(page)/(loggedIn)/(home)/_components/ServerWaterBarChart'
 import { PagePath } from '@/constants/urls'
 
 export const metadata: Metadata = {
   title: 'ホーム',
 }
 
-const HomePage = async () => {
+const HomePage = () => {
   const currentDate = formatDate(currentTimeDate)
 
-  const res = await fetchWaters({
-    start: formatDate(getThisSundayDay(currentDate)),
-    end: formatDate(getThisSaturDay(currentDate)),
-  })
-  const waters = (await res.json()) as WaterResponse[]
-  const todayRes = await fetchWaters({
-    start: formatDate(currentDate),
-    end: formatDate(currentDate),
-  })
-  const todayWaters = (await todayRes.json()) as WaterResponse[]
-
-  const todayVolume = todayWaters.reduce((acc, cur) => acc + cur.Volume, 0)
   return (
     <div className='pt-8 pb-16 px-4'>
       <div className='flex items-start mb-2'>
@@ -61,7 +45,9 @@ const HomePage = async () => {
             <CardTitle className='text-xl font-extrabold'> 本日の水分量</CardTitle>
           </CardHeader>
           <CardContent className='text-blue-700  flex items-center justify-between'>
-            <p className='font-extrabold text-4xl'>{todayVolume}ml</p>
+            <Suspense fallback={<LoaderIcon className='animate-spin' />}>
+              <ServerTodayVolume />
+            </Suspense>
             <IoIosArrowForward size='28px' />
           </CardContent>
         </Card>
@@ -75,7 +61,9 @@ const HomePage = async () => {
             </div>
           </CardHeader>
           <CardContent className='mt-4 h-40 p-0'>
-            <WaterBarChart waters={waters} />
+            <Suspense fallback={<LoaderIcon className='animate-spin' />}>
+              <ServerWaterBarChart />
+            </Suspense>
           </CardContent>
         </Card>
       </Link>
