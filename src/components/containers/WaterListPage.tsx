@@ -2,13 +2,11 @@
 
 import { ArrowLeftIcon, ArrowRightIcon } from 'lucide-react'
 import { useRouter } from 'next/navigation'
-import { GoPlus } from 'react-icons/go'
 
 import { addDay, formatDate, formatDateWithDayOfWeek, subtractDay } from '@/utils/format'
 
-import { WaterFormSheet } from '@/components/containers/WaterFormSheet'
+import WaterAddButton from '@/components/containers/WaterAddButton'
 import { WaterScrollArea } from '@/components/modules/WaterScrollArea'
-import { SheetTrigger } from '@/components/ui/sheet'
 
 import { WaterResponse } from '@/app/(action)/water'
 import { PagePath } from '@/constants/urls'
@@ -49,13 +47,7 @@ const WaterListPage: React.FC<WaterListPageProps> = ({ waters, date }) => {
         <p className='text-4xl font-extrabold text-blue-700 flex-1 text-center'>
           {total}ml
         </p>
-        <WaterFormSheet date={date}>
-          <SheetTrigger>
-            <div className='bg-primary text-white rounded-lg p-1'>
-              <GoPlus size='36px' />
-            </div>
-          </SheetTrigger>
-        </WaterFormSheet>
+        <WaterAddButton date={date} />
       </div>
       <WaterScrollArea
         className='max-w-lg mx-auto bg-white shadow-lg rounded-lg p-6 shadow-2xl'

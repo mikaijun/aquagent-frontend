@@ -1,6 +1,5 @@
 import { LoaderIcon } from 'lucide-react'
 import { Metadata } from 'next'
-import Image from 'next/image'
 import Link from 'next/link'
 import React, { Suspense } from 'react'
 import { IoIosArrowForward } from 'react-icons/io'
@@ -8,6 +7,7 @@ import { IoIosArrowForward } from 'react-icons/io'
 import { currentTimeDate, formatDate } from '@/utils/format'
 
 import WaterAddButton from '@/components/containers/WaterAddButton'
+import Character from '@/components/modules/Character'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 
 import ServerTodayVolume from '@/app/(page)/(loggedIn)/(home)/_components/ServerTodayVolume'
@@ -23,20 +23,7 @@ const HomePage = () => {
 
   return (
     <div className='pt-8 pb-16 px-4'>
-      <div className='flex items-start mb-2'>
-        <Image
-          alt='logo'
-          className='mt-20'
-          height={120}
-          src='/character/wink.png'
-          width={120}
-        />
-        <div className='base balloon'>
-          <p>こんにちは！</p>
-          <p>今日も水分補給を忘れずに！</p>
-        </div>
-      </div>
-
+      <Character className='mb-2' />
       <Link className='text-primary mt-4' href={PagePath.loggedIn.list}>
         <Card className='mb-4'>
           <CardHeader>

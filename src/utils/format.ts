@@ -124,6 +124,14 @@ export const formatTime = (date: string | null): string => {
 }
 
 /**
+ * 指定した日時からHHに変換する
+ */
+export const formatHour = (date: string | null): string => {
+  if (!dayjs(date).isValid()) return ''
+  return formatDayjs(date).format('HH')
+}
+
+/**
  * 指定した日時からx後の日時を取得、文字列に変換する
  */
 export const addDay = (date: string, type: ManipulateType = 'day'): string => {
