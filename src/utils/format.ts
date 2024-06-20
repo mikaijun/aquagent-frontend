@@ -102,9 +102,9 @@ export const formatMonth = (date: string | null): string => {
  * 指定した日付をMM/DD (曜日)に変換する
  */
 export const formatMonthDayWithDayOfWeek = (date: string | null): string => {
-  if (!dayjs(date).isValid()) return ''
+  if (!dayjs(date).isValid() || !date) return ''
   const value = formatDayjs(date).format('MM/DD')
-  return value + japaneseWeek(value)
+  return value + japaneseWeek(date)
 }
 
 /**
